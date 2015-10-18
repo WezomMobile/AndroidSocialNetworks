@@ -1,1 +1,4 @@
-include ':third_party:facebook', ':api_demos', 'library'
+include ':third_party:weibo',
+':third_party:facebook',
+':api_demos', 
+'library'
