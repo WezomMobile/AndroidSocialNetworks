@@ -10,8 +10,8 @@ android {
         exclude 'jaxb.properties'
     }
 
-    compileSdkVersion 19
-    buildToolsVersion "19.1.0"
+    compileSdkVersion 23
+    buildToolsVersion "23.0.1"
 
     defaultConfig {
         minSdkVersion 9
@@ -29,7 +29,10 @@ android {
 }
 
 dependencies {
-    compile 'com.android.support:support-v4:19.1.0@jar'
+    compile project(':facebook')
+    compile project(':weibo')
+
+    compile 'com.android.support:support-v4:23.0.1'
     compile 'org.twitter4j:twitter4j-core:4.0.1'
     compile 'com.google.android.gms:play-services:4.3.23@aar'
     compile 'com.github.androidsocialnetworks:facebook:3.14.2@aar'
