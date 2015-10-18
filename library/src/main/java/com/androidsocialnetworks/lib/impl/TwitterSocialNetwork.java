@@ -1,9 +1,10 @@
 package com.androidsocialnetworks.lib.impl;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
+import android.support.v4.app.ActivityCompat;
 import android.text.TextUtils;
 import android.util.Log;
 
@@ -52,8 +53,8 @@ public class TwitterSocialNetwork extends OAuthSocialNetwork {
     private Twitter mTwitter;
     private RequestToken mRequestToken;
 
-    public TwitterSocialNetwork(Fragment fragment, String consumerKey, String consumerSecret) {
-        super(fragment);
+    public TwitterSocialNetwork(Activity activity, String consumerKey, String consumerSecret) {
+        super(activity);
 
         fConsumerKey = consumerKey;
         fConsumerSecret = consumerSecret;
@@ -287,11 +288,11 @@ public class TwitterSocialNetwork extends OAuthSocialNetwork {
             if (!handleRequestResult(result, REQUEST_LOGIN)) return;
 
             if (result.containsKey(RESULT_OAUTH_LOGIN)) {
-                Intent intent = new Intent(mSocialNetworkManager.getActivity(), OAuthActivity.class)
+                Intent intent = new Intent(mActivity, OAuthActivity.class)
                         .putExtra(OAuthActivity.PARAM_CALLBACK, TWITTER_CALLBACK_URL)
                         .putExtra(OAuthActivity.PARAM_URL_TO_LOAD, result.getString(RESULT_OAUTH_LOGIN));
 
-                mSocialNetworkManager.startActivityForResult(intent, REQUEST_AUTH);
+                mActivity.startActivityForResult(intent, REQUEST_AUTH);
             }
         }
     }

@@ -1,11 +1,11 @@
 package com.androidsocialnetworks.lib;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.util.Log;
 
 import com.androidsocialnetworks.lib.listener.OnCheckIsFriendCompleteListener;
@@ -43,21 +43,21 @@ public abstract class SocialNetwork {
     public static final String REQUEST_REMOVE_FRIEND = "SocialNetwork.REQUEST_REMOVE_FRIEND";
 
     private static final String SHARED_PREFERENCES_NAME = "social_networks";
-    protected Fragment mSocialNetworkManager;
+    protected Activity mActivity;
     protected SharedPreferences mSharedPreferences;
     protected Map<String, SocialNetworkListener> mGlobalListeners = new HashMap<String, SocialNetworkListener>();
     protected Map<String, SocialNetworkListener> mLocalListeners = new HashMap<String, SocialNetworkListener>();
 
     /**
-     * @param fragment ant not activity or context, as we will need to call startActivityForResult,
-     *                 we will want to receice on onActivityResult in out SocialNetworkManager
-     *                 fragment
+     * @param activity ant not activity or activity, as we will need to call startActivityForResult,
+     *                we will want to receice on onActivityResult in out SocialNetworkManager
+     *                activity
      */
-    protected SocialNetwork(Fragment fragment) {
-        mSocialNetworkManager = fragment;
+    protected SocialNetwork(Activity activity) {
+        mActivity = activity;
 
-        mSharedPreferences = mSocialNetworkManager
-                .getActivity().getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_PRIVATE);
+        mSharedPreferences = mActivity
+                .getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_PRIVATE);
     }
 
     //////////////////// LIFECYCLE ////////////////////

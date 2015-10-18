@@ -77,8 +77,8 @@ public class LinkedInSocialNetwork extends OAuthSocialNetwork {
 
     private String mOAuthTokenSecret;
 
-    public LinkedInSocialNetwork(Fragment fragment, String consumerKey, String consumerSecret, String permissions) {
-        super(fragment);
+    public LinkedInSocialNetwork(Activity activity, String consumerKey, String consumerSecret, String permissions) {
+        super(activity);
         Log.d(TAG, "new LinkedInSocialNetwork: " + consumerKey + " : " + consumerSecret + " : " + permissions);
 
         if (TextUtils.isEmpty(consumerKey) || TextUtils.isEmpty(consumerSecret) || TextUtils.isEmpty(permissions)) {
@@ -236,11 +236,11 @@ public class LinkedInSocialNetwork extends OAuthSocialNetwork {
         protected void onPostExecute(Bundle result) {
             if (!handleRequestResult(result, REQUEST_LOGIN)) return;
 
-            Intent intent = new Intent(mSocialNetworkManager.getActivity(), OAuthActivity.class)
+            Intent intent = new Intent(mActivity, OAuthActivity.class)
                     .putExtra(OAuthActivity.PARAM_CALLBACK, OAUTH_CALLBACK_URL)
                     .putExtra(OAuthActivity.PARAM_URL_TO_LOAD, result.getString(RESULT_URL));
 
-            mSocialNetworkManager.startActivityForResult(intent, REQUEST_AUTH);
+            mActivity.startActivityForResult(intent, REQUEST_AUTH);
         }
     }
 

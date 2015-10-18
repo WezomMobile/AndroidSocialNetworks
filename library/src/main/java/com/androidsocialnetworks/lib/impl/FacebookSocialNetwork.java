@@ -1,11 +1,11 @@
 package com.androidsocialnetworks.lib.impl;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.util.Log;
 
 import com.androidsocialnetworks.lib.AccessToken;
@@ -56,8 +56,8 @@ public class FacebookSocialNetwork extends SocialNetwork {
         }
     };
 
-    public FacebookSocialNetwork(Fragment fragment) {
-        super(fragment);
+    public FacebookSocialNetwork(Activity activity) {
+        super(activity);
     }
 
     @Override
@@ -86,7 +86,7 @@ public class FacebookSocialNetwork extends SocialNetwork {
         Session currentSession = mSessionTracker.getSession();
         if (currentSession == null || currentSession.getState().isClosed()) {
             mSessionTracker.setSession(null);
-            Session session = new Session.Builder(mSocialNetworkManager.getActivity())
+            Session session = new Session.Builder(mActivity)
                     .setApplicationId(mApplicationId).build();
             Session.setActiveSession(session);
             currentSession = session;
@@ -94,7 +94,7 @@ public class FacebookSocialNetwork extends SocialNetwork {
 
         if (!currentSession.isOpened()) {
             Session.OpenRequest openRequest = null;
-            openRequest = new Session.OpenRequest(mSocialNetworkManager);
+            openRequest = new Session.OpenRequest(mActivity);
 
             openRequest.setDefaultAudience(SessionDefaultAudience.EVERYONE);
             openRequest.setPermissions(Collections.<String>emptyList());
@@ -195,7 +195,7 @@ public class FacebookSocialNetwork extends SocialNetwork {
                 return;
             } else if (session.isOpened()) {
                 // We need to get new permissions, then complete the action when we get called back.
-                session.requestNewPublishPermissions(new Session.NewPermissionsRequest(mSocialNetworkManager.getActivity(), PERMISSION));
+                session.requestNewPublishPermissions(new Session.NewPermissionsRequest(mActivity, PERMISSION));
                 return;
             }
         }
@@ -274,10 +274,10 @@ public class FacebookSocialNetwork extends SocialNetwork {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mUILifecycleHelper = new UiLifecycleHelper(mSocialNetworkManager.getActivity(), mSessionStatusCallback);
+        mUILifecycleHelper = new UiLifecycleHelper(mActivity, mSessionStatusCallback);
         mUILifecycleHelper.onCreate(savedInstanceState);
 
-        initializeActiveSessionWithCachedToken(mSocialNetworkManager.getActivity());
+        initializeActiveSessionWithCachedToken(mActivity);
         finishInit();
     }
 
@@ -301,7 +301,7 @@ public class FacebookSocialNetwork extends SocialNetwork {
 
     private void finishInit() {
         mSessionTracker = new SessionTracker(
-                mSocialNetworkManager.getActivity(), mSessionStatusCallback, null, false);
+                mActivity, mSessionStatusCallback, null, false);
     }
 
     @Override

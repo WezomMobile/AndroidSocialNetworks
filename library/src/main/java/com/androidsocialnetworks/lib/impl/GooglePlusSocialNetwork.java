@@ -8,7 +8,6 @@ import android.support.v4.app.Fragment;
 import android.util.Log;
 
 import com.androidsocialnetworks.lib.AccessToken;
-import com.androidsocialnetworks.lib.MomentUtil;
 import com.androidsocialnetworks.lib.SocialNetwork;
 import com.androidsocialnetworks.lib.SocialNetworkException;
 import com.androidsocialnetworks.lib.SocialPerson;
@@ -45,8 +44,8 @@ public class GooglePlusSocialNetwork extends SocialNetwork
     private boolean mConnectRequested;
     private Handler mHandler = new Handler();
 
-    public GooglePlusSocialNetwork(Fragment fragment) {
-        super(fragment);
+    public GooglePlusSocialNetwork(Activity activity) {
+        super(activity);
     }
 
     @Override
@@ -66,7 +65,7 @@ public class GooglePlusSocialNetwork extends SocialNetwork
         mConnectRequested = true;
 
         try {
-            mConnectionResult.startResolutionForResult(mSocialNetworkManager.getActivity(), REQUEST_AUTH);
+            mConnectionResult.startResolutionForResult(mActivity, REQUEST_AUTH);
         } catch (Exception e) {
             Log.e(TAG, "ERROR", e);
             if (!mGoogleApiClient.isConnecting()) {
@@ -177,7 +176,7 @@ public class GooglePlusSocialNetwork extends SocialNetwork
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mGoogleApiClient = new GoogleApiClient.Builder(
-		mSocialNetworkManager.getActivity()).addApi(Plus.API)
+		mActivity).addApi(Plus.API)
 				.addScope(Plus.SCOPE_PLUS_LOGIN)
 				.addScope(Plus.SCOPE_PLUS_PROFILE)
 				.addConnectionCallbacks(this)

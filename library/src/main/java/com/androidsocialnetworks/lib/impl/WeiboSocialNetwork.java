@@ -1,6 +1,7 @@
 package com.androidsocialnetworks.lib.impl;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -46,7 +47,7 @@ public class WeiboSocialNetwork extends OAuthSocialNetwork {
             + "follow_app_official_microblog,"
             + "invitation_write ";
 
-    private Activity mContext;
+    private Context mContext;
     private String mConsumerKey;
     private AuthInfo mAuthInfo;
     private SsoHandler mSsoHandler;
@@ -56,22 +57,22 @@ public class WeiboSocialNetwork extends OAuthSocialNetwork {
     private StatusesAPI mStatusesAPI;
 
 
-    protected WeiboSocialNetwork(Fragment fragment, String consumerKey) {
-        super(fragment);
+    public WeiboSocialNetwork(Context context, String consumerKey) {
+        super(context);
 
-        mContext = fragment.getActivity();
+        mContext = context;
         mConsumerKey = consumerKey;
 
         if (TextUtils.isEmpty(mConsumerKey)) {
             throw new IllegalArgumentException("consumerKey is invalid");
         }
 
-        initWeibo();
+        initWeiboClient();
     }
 
-    private void initWeibo() {
+    private void initWeiboClient() {
         mAuthInfo = new AuthInfo(mContext, mConsumerKey, REDIRECT_URL, SCOPE);
-        mSsoHandler = new SsoHandler(mContext, mAuthInfo);
+        mSsoHandler = new SsoHandler(null, mAuthInfo);
 
         mAccessToken = AccessTokenKeeper.readAccessToken(mContext);
     }

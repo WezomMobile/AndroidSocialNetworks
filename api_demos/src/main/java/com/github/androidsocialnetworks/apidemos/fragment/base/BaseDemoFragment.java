@@ -46,24 +46,15 @@ public abstract class BaseDemoFragment extends Fragment
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setRetainInstance(true);
+        mSocialNetworkManager = SocialNetworkManager.Builder.from(getActivity())
+                .twitter("3IYEDC9Pq5SIjzENhgorlpera", "fawjHMhyzhrfcFKZVB6d5YfiWbWGmgX7vPfazi61xZY9pdD1aE")
+                .linkedIn("77ieoe71pon7wq", "pp5E8hkdY9voGC9y", "r_basicprofile+rw_nus+r_network+w_messages")
+                .weibo("2045436852")
+                .facebook()
+                .googlePlus()
+                .build();
 
-        mSocialNetworkManager = (SocialNetworkManager) getFragmentManager().findFragmentByTag(SOCIAL_NETWORK_TAG);
-
-        if (mSocialNetworkManager == null) {
-            mSocialNetworkManager = SocialNetworkManager.Builder.from(getActivity())
-                    .twitter("3IYEDC9Pq5SIjzENhgorlpera", "fawjHMhyzhrfcFKZVB6d5YfiWbWGmgX7vPfazi61xZY9pdD1aE")
-                    .linkedIn("77ieoe71pon7wq", "pp5E8hkdY9voGC9y", "r_basicprofile+rw_nus+r_network+w_messages")
-                    .facebook()
-                    .googlePlus()
-                    .build();
-            getFragmentManager().beginTransaction().add(mSocialNetworkManager, SOCIAL_NETWORK_TAG).commit();
-
-            mSocialNetworkManager.setOnInitializationCompleteListener(this);
-        } else {
-            // we need to setup buttons correctly, mSocialNetworkManager isn't null, so
-            // we are sure that it was initialized
-            mSocialNetworkManagerInitialized = true;
-        }
+        mSocialNetworkManager.setOnInitializationCompleteListener(this);
     }
 
     @Override

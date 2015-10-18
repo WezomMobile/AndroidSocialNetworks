@@ -1,9 +1,9 @@
 package com.androidsocialnetworks.lib;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.text.TextUtils;
 import android.util.Log;
 
@@ -11,6 +11,7 @@ import com.androidsocialnetworks.lib.impl.FacebookSocialNetwork;
 import com.androidsocialnetworks.lib.impl.GooglePlusSocialNetwork;
 import com.androidsocialnetworks.lib.impl.LinkedInSocialNetwork;
 import com.androidsocialnetworks.lib.impl.TwitterSocialNetwork;
+import com.androidsocialnetworks.lib.impl.WeiboSocialNetwork;
 import com.facebook.internal.Utility;
 
 import java.util.ArrayList;
@@ -19,65 +20,46 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class SocialNetworkManager extends Fragment {
+public class SocialNetworkManager {
 
     private static final String TAG = SocialNetworkManager.class.getSimpleName();
-    private static final String PARAM_TWITTER_KEY = "SocialNetworkManager.PARAM_TWITTER_KEY";
-    private static final String PARAM_TWITTER_SECRET = "SocialNetworkManager.PARAM_TWITTER_SECRET";
-    private static final String PARAM_LINKEDIN_KEY = "SocialNetworkManager.PARAM_LINKEDIN_KEY";
-    private static final String PARAM_LINKEDIN_SECRET = "SocialNetworkManager.PARAM_LINKEDIN_SECRET";
-    private static final String PARAM_LINKEDIN_PERMISSIONS = "SocialNetworkManager.PARAM_LINKEDIN_PERMISSIONS";
-    private static final String PARAM_FACEBOOK = "SocialNetworkManager.PARAM_FACEBOOK";
-    private static final String PARAM_GOOGLE_PLUS = "SocialNetworkManager.PARAM_GOOGLE_PLUS";
 
     private Map<Integer, SocialNetwork> mSocialNetworksMap = new HashMap<Integer, SocialNetwork>();
     private OnInitializationCompleteListener mOnInitializationCompleteListener;
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        Log.d(TAG, "SocialNetworkManager.onCreate");
+    private SocialNetworkManager(Activity activity, String twitterConsumerKey, String twitterConsumerSecret, String linkedInConsumerKey,
+                                 String linkedInConsumerSecret, String linkedInPermissions, String weiboConsumerKey,
+                                 boolean isFacebook, boolean isGooglePlus) {
 
-        setRetainInstance(true);
-
-        Bundle args = getArguments();
-
-        final String paramTwitterKey = args.getString(PARAM_TWITTER_KEY);
-        final String paramTwitterSecret = args.getString(PARAM_TWITTER_SECRET);
-
-        final String paramLinkedInKey = args.getString(PARAM_LINKEDIN_KEY);
-        final String paramLinkedInSecret = args.getString(PARAM_LINKEDIN_SECRET);
-        final String paramLinkedInPermissions = args.getString(PARAM_LINKEDIN_PERMISSIONS);
-
-        final boolean paramFacebook = args.getBoolean(PARAM_FACEBOOK, false);
-        final boolean paramGooglePlus = args.getBoolean(PARAM_GOOGLE_PLUS, false);
-
-        if (!TextUtils.isEmpty(paramTwitterKey) || !TextUtils.isEmpty(paramTwitterKey)) {
+        if (!TextUtils.isEmpty(twitterConsumerKey) || !TextUtils.isEmpty(twitterConsumerSecret)) {
             mSocialNetworksMap.put(TwitterSocialNetwork.ID,
-                    new TwitterSocialNetwork(this, paramTwitterKey, paramTwitterSecret));
+                    new TwitterSocialNetwork(activity, twitterConsumerKey, twitterConsumerSecret));
         }
 
-        if (!TextUtils.isEmpty(paramLinkedInKey) || !TextUtils.isEmpty(paramLinkedInSecret)) {
+        if (!TextUtils.isEmpty(linkedInConsumerKey) || !TextUtils.isEmpty(linkedInConsumerSecret)) {
             mSocialNetworksMap.put(LinkedInSocialNetwork.ID,
-                    new LinkedInSocialNetwork(this, paramLinkedInKey, paramLinkedInSecret, paramLinkedInPermissions));
+                    new LinkedInSocialNetwork(activity, linkedInConsumerKey, linkedInConsumerSecret, linkedInPermissions));
         }
 
-        if (paramFacebook) {
-            mSocialNetworksMap.put(FacebookSocialNetwork.ID, new FacebookSocialNetwork(this));
+        if (!TextUtils.isEmpty(weiboConsumerKey)) {
+            mSocialNetworksMap.put(LinkedInSocialNetwork.ID,
+                    new WeiboSocialNetwork(activity, weiboConsumerKey));
         }
 
-        if (paramGooglePlus) {
-            mSocialNetworksMap.put(GooglePlusSocialNetwork.ID, new GooglePlusSocialNetwork(this));
+        if (isFacebook) {
+            mSocialNetworksMap.put(FacebookSocialNetwork.ID, new FacebookSocialNetwork(activity));
+        }
+
+        if (isGooglePlus) {
+            mSocialNetworksMap.put(GooglePlusSocialNetwork.ID, new GooglePlusSocialNetwork(activity));
         }
 
         for (SocialNetwork socialNetwork : mSocialNetworksMap.values()) {
-            socialNetwork.onCreate(savedInstanceState);
+            socialNetwork.onCreate(null);
         }
     }
 
-    @Override
     public void onStart() {
-        super.onStart();
         Log.d(TAG, "SocialNetworkManager.onStart");
 
         for (SocialNetwork socialNetwork : mSocialNetworksMap.values()) {
@@ -85,9 +67,7 @@ public class SocialNetworkManager extends Fragment {
         }
     }
 
-    @Override
     public void onResume() {
-        super.onResume();
         Log.d(TAG, "SocialNetworkManager.onResume");
 
         for (SocialNetwork socialNetwork : mSocialNetworksMap.values()) {
@@ -100,9 +80,7 @@ public class SocialNetworkManager extends Fragment {
         }
     }
 
-    @Override
     public void onPause() {
-        super.onPause();
         Log.d(TAG, "SocialNetworkManager.onPause");
 
         for (SocialNetwork socialNetwork : mSocialNetworksMap.values()) {
@@ -110,9 +88,7 @@ public class SocialNetworkManager extends Fragment {
         }
     }
 
-    @Override
     public void onStop() {
-        super.onStop();
         Log.d(TAG, "SocialNetworkManager.onStop");
 
         for (SocialNetwork socialNetwork : mSocialNetworksMap.values()) {
@@ -120,9 +96,7 @@ public class SocialNetworkManager extends Fragment {
         }
     }
 
-    @Override
     public void onDestroy() {
-        super.onDestroy();
         Log.d(TAG, "SocialNetworkManager.onDestroy");
 
         for (SocialNetwork socialNetwork : mSocialNetworksMap.values()) {
@@ -130,9 +104,7 @@ public class SocialNetworkManager extends Fragment {
         }
     }
 
-    @Override
     public void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
         Log.d(TAG, "SocialNetworkManager.onSaveInstanceState");
 
         for (SocialNetwork socialNetwork : mSocialNetworksMap.values()) {
@@ -140,9 +112,7 @@ public class SocialNetworkManager extends Fragment {
         }
     }
 
-    @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
         Log.d(TAG, "SocialNetworkManager.onActivityResult: " + requestCode + " : " + resultCode);
 
         for (SocialNetwork socialNetwork : mSocialNetworksMap.values()) {
@@ -182,6 +152,14 @@ public class SocialNetworkManager extends Fragment {
         return (GooglePlusSocialNetwork) mSocialNetworksMap.get(GooglePlusSocialNetwork.ID);
     }
 
+    public WeiboSocialNetwork getWeiboSocialNetwork() {
+        if (!mSocialNetworksMap.containsKey(WeiboSocialNetwork.ID)) {
+            throw new IllegalStateException("Weibo wasn't initialized...");
+        }
+
+        return (WeiboSocialNetwork) mSocialNetworksMap.get(WeiboSocialNetwork.ID);
+    }
+
     public SocialNetwork getSocialNetwork(int id) throws SocialNetworkException {
         if (!mSocialNetworksMap.containsKey(id)) {
             throw new SocialNetworkException("Social network with id = " + id + " not found");
@@ -206,83 +184,71 @@ public class SocialNetworkManager extends Fragment {
         mOnInitializationCompleteListener = onInitializationCompleteListener;
     }
 
-    public static interface OnInitializationCompleteListener {
-        public void onSocialNetworkManagerInitialized();
+    public interface OnInitializationCompleteListener {
+        void onSocialNetworkManagerInitialized();
     }
 
     public static class Builder {
-        private String twitterConsumerKey, twitterConsumerSecret;
-        private String linkedInConsumerKey, linkedInConsumerSecret, linkedInPermissions;
-        private boolean facebook;
-        private boolean googlePlus;
 
-        private Context mContext;
+        private Activity mActivity;
+        private String mTwitterConsumerKey;
+        private String mTwitterConsumerSecret;
+        private String mLinkedInConsumerKey;
+        private String mLinkedInConsumerSecret;
+        private String mLinkedInPermissions;
+        private String mWeiboConsumerKey;
+        private boolean mFacebook;
+        private boolean mGooglePlus;
 
-        private Builder(Context context) {
-            mContext = context;
+        private Builder(Activity activity) {
+            mActivity = activity;
         }
 
-        public static Builder from(Context context) {
-            return new Builder(context);
+        public static Builder from(Activity activity) {
+            return new Builder(activity);
         }
 
         public Builder twitter(String consumerKey, String consumerSecret) {
-            twitterConsumerKey = consumerKey;
-            twitterConsumerSecret = consumerSecret;
+            mTwitterConsumerKey = consumerKey;
+            mTwitterConsumerSecret = consumerSecret;
             return this;
         }
 
         public Builder linkedIn(String consumerKey, String consumerSecret, String permissions) {
-            linkedInConsumerKey = consumerKey;
-            linkedInConsumerSecret = consumerSecret;
-            linkedInPermissions = permissions;
+            mLinkedInConsumerKey = consumerKey;
+            mLinkedInConsumerSecret = consumerSecret;
+            mLinkedInPermissions = permissions;
+            return this;
+        }
+
+        public Builder weibo(String consumerKey) {
+            mWeiboConsumerKey = consumerKey;
             return this;
         }
 
         // https://developers.facebook.com/docs/android/getting-started/
         public Builder facebook() {
-            String applicationID = Utility.getMetadataApplicationId(mContext);
+            String applicationID = Utility.getMetadataApplicationId(mActivity);
 
             if (applicationID == null) {
                 throw new IllegalStateException("applicationID can't be null\n" +
                         "Please check https://developers.facebook.com/docs/android/getting-started/");
             }
 
-            facebook = true;
+            mFacebook = true;
 
             return this;
         }
 
         public Builder googlePlus() {
-            googlePlus = true;
+            mGooglePlus = true;
             return this;
         }
 
         public SocialNetworkManager build() {
-            Bundle args = new Bundle();
-
-            if (!TextUtils.isEmpty(twitterConsumerKey) && !TextUtils.isEmpty(twitterConsumerSecret)) {
-                args.putString(PARAM_TWITTER_KEY, twitterConsumerKey);
-                args.putString(PARAM_TWITTER_SECRET, twitterConsumerSecret);
-            }
-
-            if (!TextUtils.isEmpty(linkedInConsumerKey) && !TextUtils.isEmpty(linkedInConsumerSecret)
-                    && !TextUtils.isEmpty(linkedInPermissions)) {
-                args.putString(PARAM_LINKEDIN_KEY, linkedInConsumerKey);
-                args.putString(PARAM_LINKEDIN_SECRET, linkedInConsumerSecret);
-                args.putString(PARAM_LINKEDIN_PERMISSIONS, linkedInPermissions);
-            }
-
-            if (facebook) {
-                args.putBoolean(PARAM_FACEBOOK, true);
-            }
-
-            if (googlePlus) {
-                args.putBoolean(PARAM_GOOGLE_PLUS, true);
-            }
-
-            SocialNetworkManager socialNetworkManager = new SocialNetworkManager();
-            socialNetworkManager.setArguments(args);
+            SocialNetworkManager socialNetworkManager =
+                    new SocialNetworkManager(mActivity, mTwitterConsumerKey, mTwitterConsumerSecret, mLinkedInConsumerKey,
+                            mLinkedInConsumerSecret, mLinkedInPermissions, mWeiboConsumerKey, mFacebook, mGooglePlus);
             return socialNetworkManager;
         }
     }

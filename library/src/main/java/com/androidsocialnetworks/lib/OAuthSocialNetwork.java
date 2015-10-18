@@ -1,6 +1,9 @@
 package com.androidsocialnetworks.lib;
 
+import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 
@@ -15,8 +18,8 @@ public abstract class OAuthSocialNetwork extends SocialNetwork {
 
     protected Map<String, SocialNetworkAsyncTask> mRequests = new HashMap<String, SocialNetworkAsyncTask>();
 
-    protected OAuthSocialNetwork(Fragment fragment) {
-        super(fragment);
+    protected OAuthSocialNetwork(Activity activity) {
+        super(activity);
     }
 
     protected void executeRequest(SocialNetworkAsyncTask request, Bundle params, String requestID) {
