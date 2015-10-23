@@ -6,6 +6,7 @@ import android.view.View;
 import com.androidsocialnetworks.lib.impl.FacebookSocialNetwork;
 import com.androidsocialnetworks.lib.impl.LinkedInSocialNetwork;
 import com.androidsocialnetworks.lib.impl.TwitterSocialNetwork;
+import com.androidsocialnetworks.lib.impl.WeiboSocialNetwork;
 import com.androidsocialnetworks.lib.listener.OnPostingCompleteListener;
 import com.github.androidsocialnetworks.apidemos.fragment.base.BaseDemoFragment;
 
@@ -34,7 +35,7 @@ public class PostMessageFragment extends BaseDemoFragment {
         final String message = "ASN Test: " + UUID.randomUUID();
 
         showProgress("Posting message");
-        mSocialNetworkManager.getTwitterSocialNetwork().requestPostMessage(message,
+        getSocialNetworkManager().getTwitterSocialNetwork().requestPostMessage(message,
                 new DemoOnPostingCompleteListener(message)
         );
     }
@@ -46,7 +47,7 @@ public class PostMessageFragment extends BaseDemoFragment {
         final String message = "ASN Test: " + UUID.randomUUID();
 
         showProgress("Posting message");
-        mSocialNetworkManager.getLinkedInSocialNetwork().requestPostMessage(message,
+        getSocialNetworkManager().getLinkedInSocialNetwork().requestPostMessage(message,
                 new DemoOnPostingCompleteListener(message)
         );
     }
@@ -58,7 +59,7 @@ public class PostMessageFragment extends BaseDemoFragment {
         final String message = "ASN Test: " + UUID.randomUUID();
 
         showProgress("Posting message");
-        mSocialNetworkManager.getFacebookSocialNetwork().requestPostMessage(message,
+        getSocialNetworkManager().getFacebookSocialNetwork().requestPostMessage(message,
                 new DemoOnPostingCompleteListener(message)
         );
     }
@@ -66,6 +67,18 @@ public class PostMessageFragment extends BaseDemoFragment {
     @Override
     protected void onGooglePlusAction() {
         throw new IllegalStateException("Unsupported");
+    }
+
+    @Override
+    protected void onWeiboAction() {
+        if (!checkIsLoginned(WeiboSocialNetwork.ID)) return;
+
+        final String message = "Weibo Test message: " + UUID.randomUUID();
+
+        showProgress("Posting message");
+        getSocialNetworkManager().getWeiboSocialNetwork().requestPostMessage(message,
+                new DemoOnPostingCompleteListener(message)
+        );
     }
 
     private class DemoOnPostingCompleteListener implements OnPostingCompleteListener {

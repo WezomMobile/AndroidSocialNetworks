@@ -36,7 +36,7 @@ public class OtherUsersProfile extends BaseDemoFragment {
         if (!checkIsLoginned(TwitterSocialNetwork.ID)) return;
 
         showProgress("Loading profile");
-        mSocialNetworkManager.getTwitterSocialNetwork().requestSocialPerson(APIDemosApplication.USER_ID_TWITTER,
+        getSocialNetworkManager().getTwitterSocialNetwork().requestSocialPerson(APIDemosApplication.USER_ID_TWITTER,
                 new DemoOnRequestSocialPersonCompleteListener()
         );
     }
@@ -46,7 +46,7 @@ public class OtherUsersProfile extends BaseDemoFragment {
         if (!checkIsLoginned(LinkedInSocialNetwork.ID)) return;
 
         showProgress("Loading profile");
-        mSocialNetworkManager.getLinkedInSocialNetwork().requestSocialPerson(APIDemosApplication.USER_ID_LINKED_IN,
+        getSocialNetworkManager().getLinkedInSocialNetwork().requestSocialPerson(APIDemosApplication.USER_ID_LINKED_IN,
                 new DemoOnRequestSocialPersonCompleteListener()
         );
     }
@@ -63,6 +63,11 @@ public class OtherUsersProfile extends BaseDemoFragment {
         if (!checkIsLoginned(GooglePlusSocialNetwork.ID)) return;
 
         Toast.makeText(getActivity(), "Load Google Plus Profile", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    protected void onWeiboAction() {
+        throw new IllegalStateException("Not implemented");
     }
 
     private class DemoOnRequestSocialPersonCompleteListener implements OnRequestSocialPersonCompleteListener {

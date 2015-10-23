@@ -22,23 +22,28 @@ public class LoginUsingGlobalListenersFragment extends BaseLoginDemoFragment
     @Override
     protected void onTwitterAction() {
         showProgress("Authentificating... Twitter");
-        mSocialNetworkManager.getTwitterSocialNetwork().requestLogin();
+        getSocialNetworkManager().getTwitterSocialNetwork().requestLogin();
     }
 
     @Override
     protected void onLinkedInAction() {
         showProgress("Authentificating... LinkedIn");
-        mSocialNetworkManager.getLinkedInSocialNetwork().requestLogin();
+        getSocialNetworkManager().getLinkedInSocialNetwork().requestLogin();
     }
 
     @Override
     protected void onFacebookAction() {
-        mSocialNetworkManager.getFacebookSocialNetwork().requestLogin();
+        getSocialNetworkManager().getFacebookSocialNetwork().requestLogin();
     }
 
     @Override
     protected void onGooglePlusAction() {
-        mSocialNetworkManager.getGooglePlusSocialNetwork().requestLogin();
+        getSocialNetworkManager().getGooglePlusSocialNetwork().requestLogin();
+    }
+
+    @Override
+    protected void onWeiboAction() {
+        getSocialNetworkManager().getWeiboSocialNetwork().requestLogin();
     }
 
     @Override
@@ -54,7 +59,7 @@ public class LoginUsingGlobalListenersFragment extends BaseLoginDemoFragment
     public void onSocialNetworkManagerInitialized() {
         super.onSocialNetworkManagerInitialized();
 
-        for (SocialNetwork socialNetwork : mSocialNetworkManager.getInitializedSocialNetworks()) {
+        for (SocialNetwork socialNetwork : getSocialNetworkManager().getInitializedSocialNetworks()) {
             socialNetwork.setOnLoginCompleteListener(this);
         }
     }

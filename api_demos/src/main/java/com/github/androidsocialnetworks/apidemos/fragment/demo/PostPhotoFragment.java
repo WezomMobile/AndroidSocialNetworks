@@ -48,7 +48,7 @@ public class PostPhotoFragment extends BaseDemoFragment {
         final String message = "ASN Test: " + UUID.randomUUID();
 
         showProgress("Posting photo");
-        mSocialNetworkManager.getTwitterSocialNetwork().requestPostPhoto(ANDROID_ASSET_FILE, message,
+        getSocialNetworkManager().getTwitterSocialNetwork().requestPostPhoto(ANDROID_ASSET_FILE, message,
                 new DemoOnPostingCompleteListener(message)
         );
     }
@@ -65,7 +65,7 @@ public class PostPhotoFragment extends BaseDemoFragment {
         final String message = "ASN Test: " + UUID.randomUUID();
 
         showProgress("Posting photo");
-        mSocialNetworkManager.getFacebookSocialNetwork().requestPostPhoto(ANDROID_ASSET_FILE, message,
+        getSocialNetworkManager().getFacebookSocialNetwork().requestPostPhoto(ANDROID_ASSET_FILE, message,
                 new DemoOnPostingCompleteListener(message)
         );
     }
@@ -73,6 +73,11 @@ public class PostPhotoFragment extends BaseDemoFragment {
     @Override
     protected void onGooglePlusAction() {
         throw new IllegalStateException("Unsupported");
+    }
+
+    @Override
+    protected void onWeiboAction() {
+        throw new IllegalStateException("Not implemented");
     }
 
     private void copyAssets() {

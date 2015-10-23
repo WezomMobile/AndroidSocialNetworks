@@ -28,7 +28,7 @@ public class SocialNetworkManager {
     private OnInitializationCompleteListener mOnInitializationCompleteListener;
 
     private SocialNetworkManager(Activity activity, String twitterConsumerKey, String twitterConsumerSecret, String linkedInConsumerKey,
-                                 String linkedInConsumerSecret, String linkedInPermissions, String weiboConsumerKey,
+                                 String linkedInConsumerSecret, String linkedInPermissions, String weiboConsumerKey, String weiboConsumerSecret,
                                  boolean isFacebook, boolean isGooglePlus) {
 
         if (!TextUtils.isEmpty(twitterConsumerKey) || !TextUtils.isEmpty(twitterConsumerSecret)) {
@@ -42,8 +42,8 @@ public class SocialNetworkManager {
         }
 
         if (!TextUtils.isEmpty(weiboConsumerKey)) {
-            mSocialNetworksMap.put(LinkedInSocialNetwork.ID,
-                    new WeiboSocialNetwork(activity, weiboConsumerKey));
+            mSocialNetworksMap.put(WeiboSocialNetwork.ID,
+                    new WeiboSocialNetwork(activity, weiboConsumerKey, weiboConsumerSecret));
         }
 
         if (isFacebook) {
@@ -197,6 +197,7 @@ public class SocialNetworkManager {
         private String mLinkedInConsumerSecret;
         private String mLinkedInPermissions;
         private String mWeiboConsumerKey;
+        private String mWeiboConsumerSecret;
         private boolean mFacebook;
         private boolean mGooglePlus;
 
@@ -221,8 +222,9 @@ public class SocialNetworkManager {
             return this;
         }
 
-        public Builder weibo(String consumerKey) {
+        public Builder weibo(String consumerKey, String consumerSecret) {
             mWeiboConsumerKey = consumerKey;
+            mWeiboConsumerSecret = consumerSecret;
             return this;
         }
 
@@ -248,7 +250,7 @@ public class SocialNetworkManager {
         public SocialNetworkManager build() {
             SocialNetworkManager socialNetworkManager =
                     new SocialNetworkManager(mActivity, mTwitterConsumerKey, mTwitterConsumerSecret, mLinkedInConsumerKey,
-                            mLinkedInConsumerSecret, mLinkedInPermissions, mWeiboConsumerKey, mFacebook, mGooglePlus);
+                            mLinkedInConsumerSecret, mLinkedInPermissions, mWeiboConsumerKey, mWeiboConsumerSecret, mFacebook, mGooglePlus);
             return socialNetworkManager;
         }
     }

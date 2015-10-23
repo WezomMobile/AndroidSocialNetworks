@@ -29,7 +29,7 @@ public class CheckIsFriendFragment extends BaseDemoFragment {
         if (!checkIsLoginned(TwitterSocialNetwork.ID)) return;
 
         showProgress("Checking do you follow Anton Krasov");
-        mSocialNetworkManager.getTwitterSocialNetwork().requestCheckIsFriend(
+        getSocialNetworkManager().getTwitterSocialNetwork().requestCheckIsFriend(
                 APIDemosApplication.USER_ID_TWITTER,
                 new DemoTwitterOnCheckIsFriendCompleteListener()
         );
@@ -41,7 +41,7 @@ public class CheckIsFriendFragment extends BaseDemoFragment {
         if (!checkIsLoginned(LinkedInSocialNetwork.ID)) return;
 
         showProgress("Checking is Anton Krasov in your connections");
-        mSocialNetworkManager.getLinkedInSocialNetwork().requestCheckIsFriend(
+        getSocialNetworkManager().getLinkedInSocialNetwork().requestCheckIsFriend(
                 APIDemosApplication.USER_ID_LINKED_IN,
                 new DemoLinkedInOnCheckIsFriendCompleteListener()
         );
@@ -55,6 +55,11 @@ public class CheckIsFriendFragment extends BaseDemoFragment {
     @Override
     protected void onGooglePlusAction() {
         throw new IllegalStateException("Unsupported");
+    }
+
+    @Override
+    protected void onWeiboAction() {
+        throw new IllegalStateException("Not implemented");
     }
 
     private class DemoTwitterOnCheckIsFriendCompleteListener implements OnCheckIsFriendCompleteListener {

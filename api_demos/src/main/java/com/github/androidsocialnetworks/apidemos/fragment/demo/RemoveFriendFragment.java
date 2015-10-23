@@ -28,7 +28,7 @@ public class RemoveFriendFragment extends BaseDemoFragment {
         if (!checkIsLoginned(TwitterSocialNetwork.ID)) return;
 
         showProgress("Unfollowing Anton Krasov");
-        mSocialNetworkManager.getTwitterSocialNetwork().requestRemoveFriend(
+        getSocialNetworkManager().getTwitterSocialNetwork().requestRemoveFriend(
                 APIDemosApplication.USER_ID_TWITTER,
                 new OnRequestRemoveFriendCompleteListener() {
                     @Override
@@ -60,5 +60,10 @@ public class RemoveFriendFragment extends BaseDemoFragment {
     @Override
     protected void onGooglePlusAction() {
         throw new IllegalStateException("Unsupported");
+    }
+
+    @Override
+    protected void onWeiboAction() {
+        throw new IllegalStateException("Not implemented");
     }
 }

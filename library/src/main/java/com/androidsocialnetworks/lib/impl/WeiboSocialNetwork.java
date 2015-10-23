@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.text.TextUtils;
 import android.util.Log;
 
@@ -41,14 +40,15 @@ public class WeiboSocialNetwork extends OAuthSocialNetwork {
     private static final String TAG = WeiboSocialNetwork.class.getSimpleName();
 
     public static final int ID = 5;
-    private static final String REDIRECT_URL = "https://api.weibo.com/oauth2/default.html";
+    private static final String REDIRECT_URL = "http://www.sina.com";
     public static final String SCOPE = "email,direct_messages_read,direct_messages_write,"
             + "friendships_groups_read,friendships_groups_write,statuses_to_me_read,"
             + "follow_app_official_microblog,"
             + "invitation_write ";
 
-    private Context mContext;
+    private Activity mActivity;
     private String mConsumerKey;
+    private String mWeiboConsumerSecret;
     private AuthInfo mAuthInfo;
     private SsoHandler mSsoHandler;
     private Oauth2AccessToken mAccessToken;
@@ -57,11 +57,12 @@ public class WeiboSocialNetwork extends OAuthSocialNetwork {
     private StatusesAPI mStatusesAPI;
 
 
-    public WeiboSocialNetwork(Context context, String consumerKey) {
-        super(context);
+    public WeiboSocialNetwork(Activity activity, String consumerKey, String weiboConsumerSecret) {
+        super(activity);
 
-        mContext = context;
+        mActivity = activity;
         mConsumerKey = consumerKey;
+        mWeiboConsumerSecret = weiboConsumerSecret;
 
         if (TextUtils.isEmpty(mConsumerKey)) {
             throw new IllegalArgumentException("consumerKey is invalid");
@@ -71,10 +72,10 @@ public class WeiboSocialNetwork extends OAuthSocialNetwork {
     }
 
     private void initWeiboClient() {
-        mAuthInfo = new AuthInfo(mContext, mConsumerKey, REDIRECT_URL, SCOPE);
-        mSsoHandler = new SsoHandler(null, mAuthInfo);
+        mAuthInfo = new AuthInfo(mActivity, mConsumerKey, REDIRECT_URL, SCOPE);
+        mSsoHandler = new SsoHandler(mActivity, mAuthInfo);
 
-        mAccessToken = AccessTokenKeeper.readAccessToken(mContext);
+        mAccessToken = AccessTokenKeeper.readAccessToken(mActivity);
     }
 
     @Override
@@ -97,7 +98,7 @@ public class WeiboSocialNetwork extends OAuthSocialNetwork {
     @Override
     public void logout() {
         if (mAccessToken != null && mAccessToken.isSessionValid()) {
-            new LogoutAPI(mContext, mConsumerKey, mAccessToken).logout(mLogoutRequestListener);
+            new LogoutAPI(mActivity, mConsumerKey, mAccessToken).logout(mLogoutRequestListener);
         }
     }
 
@@ -114,16 +115,16 @@ public class WeiboSocialNetwork extends OAuthSocialNetwork {
         }
 
         long uid = Long.parseLong(mAccessToken.getUid());
-        mUsersAPI.show(uid, mPersonInfoListener);
 
-        mUsersAPI = new UsersAPI(mContext, mConsumerKey, mAccessToken);
+        mUsersAPI = new UsersAPI(mActivity, mConsumerKey, mAccessToken);
+        mUsersAPI.show(uid, mPersonInfoListener);
     }
 
     @Override
     public void requestPostMessage(String message, OnPostingCompleteListener onPostingCompleteListener) {
         super.requestPostMessage(message, onPostingCompleteListener);
 
-        mStatusesAPI = new StatusesAPI(mContext, mConsumerKey, mAccessToken);
+        mStatusesAPI = new StatusesAPI(mActivity, mConsumerKey, mAccessToken);
         mStatusesAPI.update(message, null, null, mPostMessageListener);
     }
 
@@ -138,7 +139,7 @@ public class WeiboSocialNetwork extends OAuthSocialNetwork {
 
     @Override
     public AccessToken getAccessToken() {
-        return new AccessToken(AccessTokenKeeper.readAccessToken(mContext).getToken(), null);
+        return new AccessToken(AccessTokenKeeper.readAccessToken(mActivity).getToken(), null);
     }
 
     private class AuthListener implements WeiboAuthListener {
@@ -148,7 +149,7 @@ public class WeiboSocialNetwork extends OAuthSocialNetwork {
             mAccessToken = Oauth2AccessToken.parseAccessToken(values);
             if (mAccessToken.isSessionValid()) {
                 // Save token to SharedPreferences
-                AccessTokenKeeper.writeAccessToken(mContext, mAccessToken);
+                AccessTokenKeeper.writeAccessToken(mActivity, mAccessToken);
                 if (mLocalListeners.get(REQUEST_LOGIN) != null) {
                     ((OnLoginCompleteListener) mLocalListeners.get(REQUEST_LOGIN)).onLoginSuccess(getID());
                     mLocalListeners.remove(REQUEST_LOGIN);
@@ -174,7 +175,7 @@ public class WeiboSocialNetwork extends OAuthSocialNetwork {
                     JSONObject responseJson = new JSONObject(response);
                     String result = responseJson.getString("result");
                     if (result.equalsIgnoreCase("true")) {
-                        AccessTokenKeeper.clear(mContext);
+                        AccessTokenKeeper.clear(mActivity);
                         mAccessToken = null;
                     }
                 } catch (JSONException e) {

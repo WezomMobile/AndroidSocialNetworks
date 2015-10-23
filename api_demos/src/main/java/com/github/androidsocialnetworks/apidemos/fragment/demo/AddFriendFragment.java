@@ -29,7 +29,7 @@ public class AddFriendFragment extends BaseDemoFragment {
         if (!checkIsLoginned(TwitterSocialNetwork.ID)) return;
 
         showProgress("Following Anton Krasov");
-        mSocialNetworkManager.getTwitterSocialNetwork().requestAddFriend(
+        getSocialNetworkManager().getTwitterSocialNetwork().requestAddFriend(
                 APIDemosApplication.USER_ID_TWITTER,
                 new DemoTwitterOnRequestAddFriendCompleteListener()
         );
@@ -40,7 +40,7 @@ public class AddFriendFragment extends BaseDemoFragment {
         if (!checkIsLoginned(LinkedInSocialNetwork.ID)) return;
 
         showProgress("Following Anton Krasov");
-        mSocialNetworkManager.getLinkedInSocialNetwork().requestAddFriend(
+        getSocialNetworkManager().getLinkedInSocialNetwork().requestAddFriend(
                 APIDemosApplication.USER_ID_LINKED_IN,
                 new DemoLinkedInOnRequestAddFriendCompleteListener()
         );
@@ -54,6 +54,11 @@ public class AddFriendFragment extends BaseDemoFragment {
     @Override
     protected void onGooglePlusAction() {
         throw new IllegalStateException("Unsupported");
+    }
+
+    @Override
+    protected void onWeiboAction() {
+        throw new IllegalStateException("Not implemented");
     }
 
     private class DemoTwitterOnRequestAddFriendCompleteListener implements OnRequestAddFriendCompleteListener {

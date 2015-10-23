@@ -11,6 +11,7 @@ import android.widget.Button;
 import com.androidsocialnetworks.lib.SocialNetwork;
 import com.androidsocialnetworks.lib.SocialNetworkManager;
 import com.github.androidsocialnetworks.apidemos.R;
+import com.github.androidsocialnetworks.apidemos.activity.MainActivity;
 import com.github.androidsocialnetworks.apidemos.fragment.dialog.AlertDialogFragment;
 import com.github.androidsocialnetworks.apidemos.fragment.dialog.ProgressDialogFragment;
 
@@ -21,13 +22,13 @@ public abstract class BaseDemoFragment extends Fragment
 
     public static final String SOCIAL_NETWORK_TAG = "BaseLoginDemoFragment.SOCIAL_NETWORK_TAG";
     private static final String PROGRESS_DIALOG_TAG = "BaseDemoFragment.PROGRESS_DIALOG_TAG";
-    protected SocialNetworkManager mSocialNetworkManager;
     protected boolean mSocialNetworkManagerInitialized = false;
 
     protected Button mTwitterButton;
     protected Button mLinkedInButton;
     protected Button mFacebookButton;
     protected Button mGooglePlusButton;
+    protected Button mWeiboButton;
 
     protected abstract void onTwitterAction();
 
@@ -36,6 +37,12 @@ public abstract class BaseDemoFragment extends Fragment
     protected abstract void onFacebookAction();
 
     protected abstract void onGooglePlusAction();
+
+    protected abstract void onWeiboAction();
+
+    public SocialNetworkManager getSocialNetworkManager() {
+        return ((MainActivity) getActivity()).getSocialNetworkManager();
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -46,15 +53,8 @@ public abstract class BaseDemoFragment extends Fragment
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setRetainInstance(true);
-        mSocialNetworkManager = SocialNetworkManager.Builder.from(getActivity())
-                .twitter("3IYEDC9Pq5SIjzENhgorlpera", "fawjHMhyzhrfcFKZVB6d5YfiWbWGmgX7vPfazi61xZY9pdD1aE")
-                .linkedIn("77ieoe71pon7wq", "pp5E8hkdY9voGC9y", "r_basicprofile+rw_nus+r_network+w_messages")
-                .weibo("2045436852")
-                .facebook()
-                .googlePlus()
-                .build();
 
-        mSocialNetworkManager.setOnInitializationCompleteListener(this);
+        getSocialNetworkManager().setOnInitializationCompleteListener(this);
     }
 
     @Override
@@ -65,11 +65,13 @@ public abstract class BaseDemoFragment extends Fragment
         mLinkedInButton = (Button) view.findViewById(R.id.linkedin_button);
         mFacebookButton = (Button) view.findViewById(R.id.facebook_button);
         mGooglePlusButton = (Button) view.findViewById(R.id.google_plus_button);
+        mWeiboButton = (Button) view.findViewById(R.id.weibo_button);
 
         mTwitterButton.setOnClickListener(this);
         mLinkedInButton.setOnClickListener(this);
         mFacebookButton.setOnClickListener(this);
         mGooglePlusButton.setOnClickListener(this);
+        mWeiboButton.setOnClickListener(this);
 
         if (mSocialNetworkManagerInitialized) {
             onSocialNetworkManagerInitialized();
@@ -120,6 +122,9 @@ public abstract class BaseDemoFragment extends Fragment
             case R.id.google_plus_button:
                 onGooglePlusAction();
                 break;
+            case R.id.weibo_button:
+                onWeiboAction();
+                break;
             default:
                 throw new IllegalArgumentException("Can't find click handler for: " + v);
         }
@@ -131,7 +136,7 @@ public abstract class BaseDemoFragment extends Fragment
     }
 
     protected boolean checkIsLoginned(int socialNetworkID) {
-        if (mSocialNetworkManager.getSocialNetwork(socialNetworkID).isConnected()) {
+        if (getSocialNetworkManager().getSocialNetwork(socialNetworkID).isConnected()) {
             return true;
         }
 
@@ -143,9 +148,9 @@ public abstract class BaseDemoFragment extends Fragment
     }
 
     public void onRequestCancel() {
-        Log.d(TAG, "BaseDemoFragment.onRequestCancel");
+//        Log.d(TAG, "BaseDemoFragment.onRequestCancel");
 
-        for (SocialNetwork socialNetwork : mSocialNetworkManager.getInitializedSocialNetworks()) {
+        for (SocialNetwork socialNetwork : getSocialNetworkManager().getInitializedSocialNetworks()) {
             socialNetwork.cancelAll();
         }
     }

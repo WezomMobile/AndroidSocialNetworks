@@ -2,21 +2,34 @@ package com.github.androidsocialnetworks.apidemos.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 
+import com.androidsocialnetworks.lib.SocialNetworkManager;
 import com.github.androidsocialnetworks.apidemos.R;
 import com.github.androidsocialnetworks.apidemos.fragment.APIDemosListFragment;
-import com.github.androidsocialnetworks.apidemos.fragment.base.BaseDemoFragment;
 
 
-public class MainActivity extends ActionBarActivity {
+public class MainActivity extends AppCompatActivity {
+
+    private SocialNetworkManager mSocialNetworkManager;
+
+    public SocialNetworkManager getSocialNetworkManager() {
+        return mSocialNetworkManager;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        mSocialNetworkManager = SocialNetworkManager.Builder.from(this)
+                .twitter("3IYEDC9Pq5SIjzENhgorlpera", "fawjHMhyzhrfcFKZVB6d5YfiWbWGmgX7vPfazi61xZY9pdD1aE")
+                .linkedIn("77ieoe71pon7wq", "pp5E8hkdY9voGC9y", "r_basicprofile+rw_nus+r_network+w_messages")
+                .weibo("2264960360", "60fcbf9d8b4f0551b7129aa79bc5dfd7")
+                .facebook()
+                .googlePlus()
+                .build();
 
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
@@ -54,13 +67,6 @@ public class MainActivity extends ActionBarActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        /**
-         * This is required only if you are using Google Plus, the issue is that there SDK
-         * require Activity to launch Auth, so library can't receive onActivityResult in fragment
-         */
-        Fragment fragment = getSupportFragmentManager().findFragmentByTag(BaseDemoFragment.SOCIAL_NETWORK_TAG);
-        if (fragment != null) {
-            fragment.onActivityResult(requestCode, resultCode, data);
-        }
+        mSocialNetworkManager.onActivityResult(requestCode, resultCode, data);
     }
 }

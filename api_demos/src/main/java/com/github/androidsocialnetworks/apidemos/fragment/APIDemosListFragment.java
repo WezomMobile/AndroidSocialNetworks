@@ -130,22 +130,20 @@ public class APIDemosListFragment extends ListFragment {
         inflater.inflate(R.menu.main, menu);
     }
 
+/*
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.reset:
-                SocialNetworkManager socialNetworkManager =
-                        (SocialNetworkManager) getFragmentManager().findFragmentByTag(BaseDemoFragment.SOCIAL_NETWORK_TAG);
-
                 for (SocialNetwork socialNetwork : socialNetworkManager.getInitializedSocialNetworks()) {
                     socialNetwork.logout();
                 }
-
                 getFragmentManager().beginTransaction().remove(socialNetworkManager).commit();
                 break;
         }
         return super.onOptionsItemSelected(item);
     }
+*/
 
     public MainActivity getMainActivity() {
         return (MainActivity) getActivity();

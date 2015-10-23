@@ -8,6 +8,7 @@ import com.androidsocialnetworks.lib.impl.FacebookSocialNetwork;
 import com.androidsocialnetworks.lib.impl.GooglePlusSocialNetwork;
 import com.androidsocialnetworks.lib.impl.LinkedInSocialNetwork;
 import com.androidsocialnetworks.lib.impl.TwitterSocialNetwork;
+import com.androidsocialnetworks.lib.impl.WeiboSocialNetwork;
 import com.androidsocialnetworks.lib.listener.OnRequestSocialPersonCompleteListener;
 import com.github.androidsocialnetworks.apidemos.R;
 import com.github.androidsocialnetworks.apidemos.fragment.base.BaseDemoFragment;
@@ -33,7 +34,7 @@ public class CurrentUserProfileFragment extends BaseDemoFragment implements View
         if (!checkIsLoginned(TwitterSocialNetwork.ID)) return;
 
         showProgress("Loading profile");
-        mSocialNetworkManager.getTwitterSocialNetwork()
+        getSocialNetworkManager().getTwitterSocialNetwork()
                 .requestCurrentPerson(new DemoOnRequestSocialPersonCompleteListener());
 
     }
@@ -43,7 +44,7 @@ public class CurrentUserProfileFragment extends BaseDemoFragment implements View
         if (!checkIsLoginned(LinkedInSocialNetwork.ID)) return;
 
         showProgress("Loading profile");
-        mSocialNetworkManager.getLinkedInSocialNetwork()
+        getSocialNetworkManager().getLinkedInSocialNetwork()
                 .requestCurrentPerson(new DemoOnRequestSocialPersonCompleteListener());
     }
 
@@ -52,7 +53,7 @@ public class CurrentUserProfileFragment extends BaseDemoFragment implements View
         if (!checkIsLoginned(FacebookSocialNetwork.ID)) return;
 
         showProgress("Loading profile");
-        mSocialNetworkManager.getFacebookSocialNetwork()
+        getSocialNetworkManager().getFacebookSocialNetwork()
                 .requestCurrentPerson(new DemoOnRequestSocialPersonCompleteListener());
     }
 
@@ -60,8 +61,17 @@ public class CurrentUserProfileFragment extends BaseDemoFragment implements View
     protected void onGooglePlusAction() {
         if (!checkIsLoginned(GooglePlusSocialNetwork.ID)) return;
 
-        mSocialNetworkManager.getGooglePlusSocialNetwork()
+        getSocialNetworkManager().getGooglePlusSocialNetwork()
                 .requestCurrentPerson(new DemoOnRequestSocialPersonCompleteListener());
+    }
+
+    @Override
+    protected void onWeiboAction() {
+        if (!checkIsLoginned(WeiboSocialNetwork.ID)) return;
+
+        getSocialNetworkManager().getWeiboSocialNetwork()
+                .requestCurrentPerson(new DemoOnRequestSocialPersonCompleteListener());
+
     }
 
     private class DemoOnRequestSocialPersonCompleteListener implements OnRequestSocialPersonCompleteListener {

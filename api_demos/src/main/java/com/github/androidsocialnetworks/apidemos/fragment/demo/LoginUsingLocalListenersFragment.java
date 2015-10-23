@@ -11,23 +11,28 @@ public class LoginUsingLocalListenersFragment extends BaseLoginDemoFragment {
     @Override
     protected void onTwitterAction() {
         showProgress("Authentificating... Twitter");
-        mSocialNetworkManager.getTwitterSocialNetwork().requestLogin(new DemoOnLoginCompleteListener());
+        getSocialNetworkManager().getTwitterSocialNetwork().requestLogin(new DemoOnLoginCompleteListener());
     }
 
     @Override
     protected void onLinkedInAction() {
         showProgress("Authentificating... LinkedIn");
-        mSocialNetworkManager.getLinkedInSocialNetwork().requestLogin(new DemoOnLoginCompleteListener());
+        getSocialNetworkManager().getLinkedInSocialNetwork().requestLogin(new DemoOnLoginCompleteListener());
     }
 
     @Override
     protected void onFacebookAction() {
-        mSocialNetworkManager.getFacebookSocialNetwork().requestLogin(new DemoOnLoginCompleteListener());
+        getSocialNetworkManager().getFacebookSocialNetwork().requestLogin(new DemoOnLoginCompleteListener());
     }
 
     @Override
     protected void onGooglePlusAction() {
-        mSocialNetworkManager.getGooglePlusSocialNetwork().requestLogin(new DemoOnLoginCompleteListener());
+        getSocialNetworkManager().getGooglePlusSocialNetwork().requestLogin(new DemoOnLoginCompleteListener());
+    }
+
+    @Override
+    protected void onWeiboAction() {
+        getSocialNetworkManager().getWeiboSocialNetwork().requestLogin(new DemoOnLoginCompleteListener());
     }
 
     private class DemoOnLoginCompleteListener implements OnLoginCompleteListener {
@@ -46,5 +51,4 @@ public class LoginUsingLocalListenersFragment extends BaseLoginDemoFragment {
             handleError(errorMessage);
         }
     }
-
 }
