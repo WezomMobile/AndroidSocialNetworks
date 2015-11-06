@@ -1,15 +1,14 @@
 package com.androidsocialnetworks.lib.impl;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 
 import com.androidsocialnetworks.lib.AccessToken;
-import com.androidsocialnetworks.lib.OAuthSocialNetwork;
 import com.androidsocialnetworks.lib.AccessTokenKeeper;
+import com.androidsocialnetworks.lib.OAuthSocialNetwork;
 import com.androidsocialnetworks.lib.SocialPerson;
 import com.androidsocialnetworks.lib.listener.OnLoginCompleteListener;
 import com.androidsocialnetworks.lib.listener.OnPostingCompleteListener;
@@ -40,7 +39,7 @@ public class WeiboSocialNetwork extends OAuthSocialNetwork {
     private static final String TAG = WeiboSocialNetwork.class.getSimpleName();
 
     public static final int ID = 5;
-    private static final String REDIRECT_URL = "http://www.sina.com";
+    private static final String REDIRECT_URL = "https://api.weibo.com/oauth2/default.html";
     public static final String SCOPE = "email,direct_messages_read,direct_messages_write,"
             + "friendships_groups_read,friendships_groups_write,statuses_to_me_read,"
             + "follow_app_official_microblog,"
