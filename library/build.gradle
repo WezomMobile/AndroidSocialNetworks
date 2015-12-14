@@ -1,9 +1,34 @@
 apply plugin: 'android-library'
+//apply plugin: 'com.android.library'
 apply plugin: 'maven'
 apply plugin: 'signing'
 
 version = "0.3.7"
 group = "com.github.androidsocialnetworks"
+
+//ext {
+//    bintrayRepo = 'maven'
+//    bintrayName = 'android-navigation-handler'
+//
+//    publishedGroupId = 'com.crazydude.navigation-handler'
+//    libraryName = 'NavigationHandler'
+//    artifact = 'navigation-handler'
+//
+//    libraryDescription = 'Android library that let you easily handle your fragment-based application with one activity'
+//
+//    siteUrl = 'https://github.com/CrazyDude1994/android-navigation-handler'
+//    gitUrl = 'https://github.com/CrazyDude1994/android-navigation-handler.git'
+//
+//    libraryVersion = '0.1'
+//
+//    developerId = 'wezom.mobile'
+//    developerName = 'Wezom Mobile'
+//    developerEmail = 'wezom.mobile@gmail.com'
+//
+//    licenseName = 'GPL-2.0'
+//    licenseUrl = 'http://opensource.org/licenses/gpl-2.0.php'
+//    allLicenses = ["GPL-2.0"]
+//}
 
 android {
     packagingOptions {
@@ -31,10 +56,14 @@ android {
 dependencies {
 
     compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile 'com.android.support:appcompat-v7:23.0.1'
     compile 'org.twitter4j:twitter4j-core:4.0.1'
     compile 'com.google.android.gms:play-services-plus:8.1.0'
     compile 'com.facebook.android:facebook-android-sdk:3+'
     compile 'com.infstory:weibo-android-sdk:3.1.2'
+    compile 'com.vk:androidsdk:+'
+
+    testCompile 'junit:junit:4.12'
 }
 
 configurations {
@@ -63,43 +92,5 @@ artifacts {
     archives javadocJar
 }
 
-//uploadArchives {
-//    configuration = configurations.archives
-//    repositories.mavenDeployer {
-//        beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
-//
-//        repository(url: sonatypeRepo) {
-//            authentication(userName: sonatypeUsername,
-//                    password: sonatypePassword)
-//        }
-//
-//        pom.project {
-//            name 'Android Social Networks Library'
-//            packaging 'aar'
-//            description 'Library for easy work with social networks on Android'
-//            url 'https://github.com/antonkrasov/AndroidSocialNetworks'
-//
-//            scm {
-//                url 'scm:git@github.com:antonkrasov/AndroidSocialNetworks'
-//                connection 'scm:git@github.com:antonkrasov/AndroidSocialNetworks.git'
-//                developerConnection 'scm:git@github.com:antonkrasov/AndroidSocialNetworks.git'
-//            }
-//
-//            licenses {
-//                license {
-//                    name 'The MIT License (MIT)'
-//                    url 'http://opensource.org/licenses/MIT'
-//                    distribution 'repo'
-//                }
-//            }
-//
-//            developers {
-//                developer {
-//                    id 'anton.krasov'
-//                    name 'Anton Krasov'
-//                    email 'anton.krasov@gmail.com'
-//                }
-//            }
-//        }
-//    }
-//}
+//apply from: 'https://raw.githubusercontent.com/nuuneoi/JCenter/master/installv1.gradle'
+//apply from: 'https://raw.githubusercontent.com/nuuneoi/JCenter/master/bintrayv1.gradle'

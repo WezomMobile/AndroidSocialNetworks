@@ -21,6 +21,12 @@ public class LoginUsingLocalListenersFragment extends BaseLoginDemoFragment {
     }
 
     @Override
+    protected void onVkInAction() {
+//        showProgress("Authentificating... Vk");
+        getSocialNetworkManager().getVkInSocialNetwork().requestLogin(new DemoOnLoginCompleteListener());
+    }
+
+    @Override
     protected void onFacebookAction() {
         getSocialNetworkManager().getFacebookSocialNetwork().requestLogin(new DemoOnLoginCompleteListener());
     }

@@ -53,6 +53,11 @@ public class PostMessageFragment extends BaseDemoFragment {
     }
 
     @Override
+    protected void onVkInAction() {
+
+    }
+
+    @Override
     protected void onFacebookAction() {
         if (!checkIsLoginned(FacebookSocialNetwork.ID)) return;
 

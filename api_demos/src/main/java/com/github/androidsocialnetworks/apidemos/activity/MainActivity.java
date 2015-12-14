@@ -27,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
                 .twitter("3IYEDC9Pq5SIjzENhgorlpera", "fawjHMhyzhrfcFKZVB6d5YfiWbWGmgX7vPfazi61xZY9pdD1aE")
                 .linkedIn("77ieoe71pon7wq", "pp5E8hkdY9voGC9y", "r_basicprofile+rw_nus+r_network+w_messages")
                 .weibo("3288380285", "e7c4cd9cd6fbddcb0bd0559ab99d0666")
+                .vk(5187494,"QF5qIydJzs4bSEdyBrAX")
                 .facebook()
                 .googlePlus()
                 .build();

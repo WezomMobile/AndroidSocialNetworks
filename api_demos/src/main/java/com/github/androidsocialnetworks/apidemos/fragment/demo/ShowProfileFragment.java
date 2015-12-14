@@ -42,7 +42,9 @@ public class ShowProfileFragment extends Fragment {
 
         profileURLTextView.setText(socialPerson.profileURL);
 
-        Picasso.with(getActivity()).load(socialPerson.avatarURL).into(avatarImageView);
+        if (!socialPerson.avatarURL.isEmpty()) {
+            Picasso.with(getActivity()).load(socialPerson.avatarURL).into(avatarImageView);
+        }
 
         StringBuilder builder = new StringBuilder();
         builder.append("ID: ");

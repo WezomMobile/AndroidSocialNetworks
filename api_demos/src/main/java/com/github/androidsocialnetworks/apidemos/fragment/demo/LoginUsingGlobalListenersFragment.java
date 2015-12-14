@@ -32,6 +32,11 @@ public class LoginUsingGlobalListenersFragment extends BaseLoginDemoFragment
     }
 
     @Override
+    protected void onVkInAction() {
+        getSocialNetworkManager().getVkInSocialNetwork().requestLogin();
+    }
+
+    @Override
     protected void onFacebookAction() {
         getSocialNetworkManager().getFacebookSocialNetwork().requestLogin();
     }

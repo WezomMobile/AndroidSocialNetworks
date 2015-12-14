@@ -11,6 +11,7 @@ import com.androidsocialnetworks.lib.impl.FacebookSocialNetwork;
 import com.androidsocialnetworks.lib.impl.GooglePlusSocialNetwork;
 import com.androidsocialnetworks.lib.impl.LinkedInSocialNetwork;
 import com.androidsocialnetworks.lib.impl.TwitterSocialNetwork;
+import com.androidsocialnetworks.lib.impl.VkSocialNetwork;
 import com.androidsocialnetworks.lib.impl.WeiboSocialNetwork;
 import com.facebook.internal.Utility;
 
@@ -29,6 +30,7 @@ public class SocialNetworkManager {
 
     private SocialNetworkManager(Activity activity, String twitterConsumerKey, String twitterConsumerSecret, String linkedInConsumerKey,
                                  String linkedInConsumerSecret, String linkedInPermissions, String weiboConsumerKey, String weiboConsumerSecret,
+                                 long vkConsumerKey,String vkConsumerSecret,
                                  boolean isFacebook, boolean isGooglePlus) {
 
         if (!TextUtils.isEmpty(twitterConsumerKey) || !TextUtils.isEmpty(twitterConsumerSecret)) {
@@ -44,6 +46,11 @@ public class SocialNetworkManager {
         if (!TextUtils.isEmpty(weiboConsumerKey)) {
             mSocialNetworksMap.put(WeiboSocialNetwork.ID,
                     new WeiboSocialNetwork(activity, weiboConsumerKey, weiboConsumerSecret));
+        }
+
+        if (!TextUtils.isEmpty(vkConsumerSecret)) {
+            mSocialNetworksMap.put(VkSocialNetwork.ID,
+                    new VkSocialNetwork(activity, vkConsumerKey, vkConsumerSecret));
         }
 
         if (isFacebook) {
@@ -136,6 +143,14 @@ public class SocialNetworkManager {
         return (LinkedInSocialNetwork) mSocialNetworksMap.get(LinkedInSocialNetwork.ID);
     }
 
+    public VkSocialNetwork getVkInSocialNetwork() throws SocialNetworkException {
+        if (!mSocialNetworksMap.containsKey(VkSocialNetwork.ID)) {
+            throw new SocialNetworkException("Vk wasn't initialized...");
+        }
+
+        return (VkSocialNetwork) mSocialNetworksMap.get(VkSocialNetwork.ID);
+    }
+
     public FacebookSocialNetwork getFacebookSocialNetwork() throws SocialNetworkException {
         if (!mSocialNetworksMap.containsKey(FacebookSocialNetwork.ID)) {
             throw new IllegalStateException("Facebook wasn't initialized...");
@@ -198,6 +213,8 @@ public class SocialNetworkManager {
         private String mLinkedInPermissions;
         private String mWeiboConsumerKey;
         private String mWeiboConsumerSecret;
+        private long mVkConsumerKey;
+        private String mVkConsumerSecret;
         private boolean mFacebook;
         private boolean mGooglePlus;
 
@@ -228,6 +245,12 @@ public class SocialNetworkManager {
             return this;
         }
 
+        public Builder vk(long consumerKey, String consumerSecret) {
+            mVkConsumerKey = consumerKey;
+           mVkConsumerSecret = consumerSecret;
+            return this;
+        }
+
         // https://developers.facebook.com/docs/android/getting-started/
         public Builder facebook() {
             String applicationID = Utility.getMetadataApplicationId(mActivity);
@@ -250,7 +273,8 @@ public class SocialNetworkManager {
         public SocialNetworkManager build() {
             SocialNetworkManager socialNetworkManager =
                     new SocialNetworkManager(mActivity, mTwitterConsumerKey, mTwitterConsumerSecret, mLinkedInConsumerKey,
-                            mLinkedInConsumerSecret, mLinkedInPermissions, mWeiboConsumerKey, mWeiboConsumerSecret, mFacebook, mGooglePlus);
+                            mLinkedInConsumerSecret, mLinkedInPermissions, mWeiboConsumerKey, mWeiboConsumerSecret,
+                            mVkConsumerKey,mVkConsumerSecret,mFacebook, mGooglePlus);
             return socialNetworkManager;
         }
     }

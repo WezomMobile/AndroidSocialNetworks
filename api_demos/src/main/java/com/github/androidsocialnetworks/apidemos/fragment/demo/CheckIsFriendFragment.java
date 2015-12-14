@@ -48,6 +48,11 @@ public class CheckIsFriendFragment extends BaseDemoFragment {
     }
 
     @Override
+    protected void onVkInAction() {
+
+    }
+
+    @Override
     protected void onFacebookAction() {
         throw new IllegalStateException("Unsupported");
     }

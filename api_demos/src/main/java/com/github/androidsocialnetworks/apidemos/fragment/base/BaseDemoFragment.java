@@ -26,6 +26,7 @@ public abstract class BaseDemoFragment extends Fragment
 
     protected Button mTwitterButton;
     protected Button mLinkedInButton;
+    protected Button mVkButton;
     protected Button mFacebookButton;
     protected Button mGooglePlusButton;
     protected Button mWeiboButton;
@@ -33,6 +34,8 @@ public abstract class BaseDemoFragment extends Fragment
     protected abstract void onTwitterAction();
 
     protected abstract void onLinkedInAction();
+
+    protected abstract void onVkInAction();
 
     protected abstract void onFacebookAction();
 
@@ -54,7 +57,10 @@ public abstract class BaseDemoFragment extends Fragment
         super.onCreate(savedInstanceState);
         setRetainInstance(true);
 
-        getSocialNetworkManager().setOnInitializationCompleteListener(this);
+        Log.d("SocialNetworkManager", getSocialNetworkManager() + "");
+        if (getSocialNetworkManager()!=null) {
+            getSocialNetworkManager().setOnInitializationCompleteListener(this);
+        }
     }
 
     @Override
@@ -63,6 +69,7 @@ public abstract class BaseDemoFragment extends Fragment
 
         mTwitterButton = (Button) view.findViewById(R.id.twitter_button);
         mLinkedInButton = (Button) view.findViewById(R.id.linkedin_button);
+        mVkButton = (Button) view.findViewById(R.id.vk_button);
         mFacebookButton = (Button) view.findViewById(R.id.facebook_button);
         mGooglePlusButton = (Button) view.findViewById(R.id.google_plus_button);
         mWeiboButton = (Button) view.findViewById(R.id.weibo_button);
@@ -70,6 +77,7 @@ public abstract class BaseDemoFragment extends Fragment
         mTwitterButton.setOnClickListener(this);
         mLinkedInButton.setOnClickListener(this);
         mFacebookButton.setOnClickListener(this);
+        mVkButton.setOnClickListener(this);
         mGooglePlusButton.setOnClickListener(this);
         mWeiboButton.setOnClickListener(this);
 
@@ -115,6 +123,9 @@ public abstract class BaseDemoFragment extends Fragment
                 break;
             case R.id.linkedin_button:
                 onLinkedInAction();
+                break;
+            case R.id.vk_button:
+                onVkInAction();
                 break;
             case R.id.facebook_button:
                 onFacebookAction();

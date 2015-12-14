@@ -29,6 +29,16 @@
         android:textColor="@android:color/white"/>
 
     <Button
+        android:id="@+id/vk_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/normal_padding"
+        android:background="#547699"
+        android:padding="@dimen/small_padding"
+        android:text="Login with Vk"
+        android:textColor="@android:color/white"/>
+
+    <Button
         android:id="@+id/facebook_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

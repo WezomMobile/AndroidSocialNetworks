@@ -8,6 +8,7 @@ import com.androidsocialnetworks.lib.impl.FacebookSocialNetwork;
 import com.androidsocialnetworks.lib.impl.GooglePlusSocialNetwork;
 import com.androidsocialnetworks.lib.impl.LinkedInSocialNetwork;
 import com.androidsocialnetworks.lib.impl.TwitterSocialNetwork;
+import com.androidsocialnetworks.lib.impl.VkSocialNetwork;
 import com.androidsocialnetworks.lib.impl.WeiboSocialNetwork;
 import com.androidsocialnetworks.lib.listener.OnRequestSocialPersonCompleteListener;
 import com.github.androidsocialnetworks.apidemos.R;
@@ -26,6 +27,7 @@ public class CurrentUserProfileFragment extends BaseDemoFragment implements View
         mTwitterButton.setText("Load Twitter Profile");
         mLinkedInButton.setText("Load LinkedIn Profile");
         mFacebookButton.setText("Load Facebook Profile");
+        mVkButton.setText("Load Vk Profile");
         mGooglePlusButton.setText("Load Google Plus Profile");
     }
 
@@ -46,6 +48,13 @@ public class CurrentUserProfileFragment extends BaseDemoFragment implements View
         showProgress("Loading profile");
         getSocialNetworkManager().getLinkedInSocialNetwork()
                 .requestCurrentPerson(new DemoOnRequestSocialPersonCompleteListener());
+    }
+
+    @Override
+    protected void onVkInAction() {
+        if (!checkIsLoginned(VkSocialNetwork.ID)) return;
+
+        getSocialNetworkManager().getVkInSocialNetwork().requestCurrentPerson(new DemoOnRequestSocialPersonCompleteListener());
     }
 
     @Override

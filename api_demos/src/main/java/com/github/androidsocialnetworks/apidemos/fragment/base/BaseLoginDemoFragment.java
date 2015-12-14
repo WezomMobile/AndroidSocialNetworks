@@ -25,6 +25,12 @@ public abstract class BaseLoginDemoFragment extends BaseDemoFragment implements 
             mFacebookButton.setOnClickListener(null);
         }
 
+        if (getSocialNetworkManager().getVkInSocialNetwork().isConnected()) {
+            mFacebookButton.setText("Vk connected");
+            mFacebookButton.setBackgroundColor(Color.LTGRAY);
+            mFacebookButton.setOnClickListener(null);
+        }
+
         if (getSocialNetworkManager().getGooglePlusSocialNetwork().isConnected()) {
             mGooglePlusButton.setText("Google Plus connected");
             mGooglePlusButton.setBackgroundColor(Color.LTGRAY);

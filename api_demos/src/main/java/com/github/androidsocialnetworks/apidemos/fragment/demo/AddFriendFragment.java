@@ -47,6 +47,11 @@ public class AddFriendFragment extends BaseDemoFragment {
     }
 
     @Override
+    protected void onVkInAction() {
+        throw new IllegalStateException("Not implemented");
+    }
+
+    @Override
     protected void onFacebookAction() {
         throw new IllegalStateException("Unsupported");
     }
