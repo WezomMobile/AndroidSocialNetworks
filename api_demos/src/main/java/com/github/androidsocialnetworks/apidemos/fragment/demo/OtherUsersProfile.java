@@ -4,12 +4,12 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
-import com.androidsocialnetworks.lib.SocialPerson;
-import com.androidsocialnetworks.lib.impl.FacebookSocialNetwork;
-import com.androidsocialnetworks.lib.impl.GooglePlusSocialNetwork;
-import com.androidsocialnetworks.lib.impl.LinkedInSocialNetwork;
-import com.androidsocialnetworks.lib.impl.TwitterSocialNetwork;
-import com.androidsocialnetworks.lib.listener.OnRequestSocialPersonCompleteListener;
+import com.wezom.socialnetworks.lib.SocialPerson;
+import com.wezom.socialnetworks.lib.impl.FacebookSocialNetwork;
+import com.wezom.socialnetworks.lib.impl.GooglePlusSocialNetwork;
+import com.wezom.socialnetworks.lib.impl.LinkedInSocialNetwork;
+import com.wezom.socialnetworks.lib.impl.TwitterSocialNetwork;
+import com.wezom.socialnetworks.lib.listener.OnRequestSocialPersonCompleteListener;
 import com.github.androidsocialnetworks.apidemos.APIDemosApplication;
 import com.github.androidsocialnetworks.apidemos.R;
 import com.github.androidsocialnetworks.apidemos.fragment.base.BaseDemoFragment;

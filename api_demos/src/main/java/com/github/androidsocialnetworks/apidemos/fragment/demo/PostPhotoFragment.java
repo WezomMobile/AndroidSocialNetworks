@@ -6,9 +6,9 @@ import android.os.Environment;
 import android.util.Log;
 import android.view.View;
 
-import com.androidsocialnetworks.lib.impl.FacebookSocialNetwork;
-import com.androidsocialnetworks.lib.impl.TwitterSocialNetwork;
-import com.androidsocialnetworks.lib.listener.OnPostingCompleteListener;
+import com.wezom.socialnetworks.lib.impl.FacebookSocialNetwork;
+import com.wezom.socialnetworks.lib.impl.TwitterSocialNetwork;
+import com.wezom.socialnetworks.lib.listener.OnPostingCompleteListener;
 import com.github.androidsocialnetworks.apidemos.APIDemosApplication;
 import com.github.androidsocialnetworks.apidemos.fragment.base.BaseDemoFragment;
 

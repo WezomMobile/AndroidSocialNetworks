@@ -5,7 +5,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 
-import com.androidsocialnetworks.lib.SocialNetworkManager;
+import com.wezom.socialnetworks.lib.SocialNetworkManager;
 import com.github.androidsocialnetworks.apidemos.R;
 import com.github.androidsocialnetworks.apidemos.fragment.APIDemosListFragment;
 

@@ -1,4 +1,4 @@
-package com.androidsocialnetworks.lib;
+package com.wezom.socialnetworks.lib;
 
 public class Consts {
 

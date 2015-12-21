@@ -1,24 +1,23 @@
-package com.androidsocialnetworks.lib.impl;
+package com.wezom.socialnetworks.lib.impl;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.v4.app.ActivityCompat;
 import android.text.TextUtils;
 import android.util.Log;
 
-import com.androidsocialnetworks.lib.OAuthActivity;
-import com.androidsocialnetworks.lib.OAuthSocialNetwork;
-import com.androidsocialnetworks.lib.SocialNetworkAsyncTask;
-import com.androidsocialnetworks.lib.SocialNetworkException;
-import com.androidsocialnetworks.lib.SocialPerson;
-import com.androidsocialnetworks.lib.listener.OnCheckIsFriendCompleteListener;
-import com.androidsocialnetworks.lib.listener.OnLoginCompleteListener;
-import com.androidsocialnetworks.lib.listener.OnPostingCompleteListener;
-import com.androidsocialnetworks.lib.listener.OnRequestAddFriendCompleteListener;
-import com.androidsocialnetworks.lib.listener.OnRequestRemoveFriendCompleteListener;
-import com.androidsocialnetworks.lib.listener.OnRequestSocialPersonCompleteListener;
+import com.wezom.socialnetworks.lib.OAuthActivity;
+import com.wezom.socialnetworks.lib.OAuthSocialNetwork;
+import com.wezom.socialnetworks.lib.SocialNetworkAsyncTask;
+import com.wezom.socialnetworks.lib.SocialNetworkException;
+import com.wezom.socialnetworks.lib.SocialPerson;
+import com.wezom.socialnetworks.lib.listener.OnCheckIsFriendCompleteListener;
+import com.wezom.socialnetworks.lib.listener.OnLoginCompleteListener;
+import com.wezom.socialnetworks.lib.listener.OnPostingCompleteListener;
+import com.wezom.socialnetworks.lib.listener.OnRequestAddFriendCompleteListener;
+import com.wezom.socialnetworks.lib.listener.OnRequestRemoveFriendCompleteListener;
+import com.wezom.socialnetworks.lib.listener.OnRequestSocialPersonCompleteListener;
 
 import java.io.File;
 import java.util.UUID;
@@ -33,7 +32,7 @@ import twitter4j.auth.AccessToken;
 import twitter4j.auth.RequestToken;
 import twitter4j.conf.ConfigurationBuilder;
 
-import static com.androidsocialnetworks.lib.Consts.TAG;
+import static com.wezom.socialnetworks.lib.Consts.TAG;
 
 public class TwitterSocialNetwork extends OAuthSocialNetwork {
     public static final int ID = 1;
@@ -104,8 +103,8 @@ public class TwitterSocialNetwork extends OAuthSocialNetwork {
     }
 
     @Override
-    public com.androidsocialnetworks.lib.AccessToken getAccessToken() {
-        return new com.androidsocialnetworks.lib.AccessToken(
+    public com.wezom.socialnetworks.lib.AccessToken getAccessToken() {
+        return new com.wezom.socialnetworks.lib.AccessToken(
                 mSharedPreferences.getString(SAVE_STATE_KEY_OAUTH_TOKEN, null),
                 mSharedPreferences.getString(SAVE_STATE_KEY_OAUTH_SECRET, null)
         );

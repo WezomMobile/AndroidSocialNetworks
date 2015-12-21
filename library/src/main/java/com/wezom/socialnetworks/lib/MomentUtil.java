@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.androidsocialnetworks.lib;
+package com.wezom.socialnetworks.lib;
 
 import com.google.android.gms.plus.model.moments.ItemScope;
 

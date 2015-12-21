@@ -1,4 +1,4 @@
-package com.androidsocialnetworks.lib;
+package com.wezom.socialnetworks.lib;
 
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -22,7 +22,7 @@ public class SocialPerson implements Parcelable {
     public String position;
     public String avatarURL;
 
-    public String profileURL; // url to users profile, can be generated for twitter, facebook, but need to get via api from LinkedIn
+    public String profileURL;
     public String nickname;
 
     public SocialPerson() {

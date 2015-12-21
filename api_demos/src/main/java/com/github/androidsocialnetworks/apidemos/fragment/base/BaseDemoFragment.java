@@ -8,14 +8,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
-import com.androidsocialnetworks.lib.SocialNetwork;
-import com.androidsocialnetworks.lib.SocialNetworkManager;
+import com.wezom.socialnetworks.lib.SocialNetwork;
+import com.wezom.socialnetworks.lib.SocialNetworkManager;
 import com.github.androidsocialnetworks.apidemos.R;
 import com.github.androidsocialnetworks.apidemos.activity.MainActivity;
 import com.github.androidsocialnetworks.apidemos.fragment.dialog.AlertDialogFragment;
 import com.github.androidsocialnetworks.apidemos.fragment.dialog.ProgressDialogFragment;
-
-import static com.github.androidsocialnetworks.apidemos.APIDemosApplication.TAG;
 
 public abstract class BaseDemoFragment extends Fragment
         implements SocialNetworkManager.OnInitializationCompleteListener, View.OnClickListener {

@@ -3,8 +3,8 @@ package com.github.androidsocialnetworks.apidemos.fragment.demo;
 import android.os.Bundle;
 import android.view.View;
 
-import com.androidsocialnetworks.lib.impl.TwitterSocialNetwork;
-import com.androidsocialnetworks.lib.listener.OnRequestRemoveFriendCompleteListener;
+import com.wezom.socialnetworks.lib.impl.TwitterSocialNetwork;
+import com.wezom.socialnetworks.lib.listener.OnRequestRemoveFriendCompleteListener;
 import com.github.androidsocialnetworks.apidemos.APIDemosApplication;
 import com.github.androidsocialnetworks.apidemos.fragment.base.BaseDemoFragment;
 

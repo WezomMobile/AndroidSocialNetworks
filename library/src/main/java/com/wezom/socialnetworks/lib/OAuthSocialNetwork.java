@@ -1,18 +1,15 @@
-package com.androidsocialnetworks.lib;
+package com.wezom.socialnetworks.lib;
 
 import android.app.Activity;
-import android.content.Context;
 import android.os.Bundle;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.Fragment;
 import android.util.Log;
 
-import com.androidsocialnetworks.lib.listener.base.SocialNetworkListener;
+import com.wezom.socialnetworks.lib.listener.base.SocialNetworkListener;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import static com.androidsocialnetworks.lib.Consts.TAG;
+import static com.wezom.socialnetworks.lib.Consts.TAG;
 
 public abstract class OAuthSocialNetwork extends SocialNetwork {
 

@@ -1,7 +1,7 @@
 package com.github.androidsocialnetworks.apidemos.fragment.demo;
 
-import com.androidsocialnetworks.lib.SocialNetwork;
-import com.androidsocialnetworks.lib.listener.OnLoginCompleteListener;
+import com.wezom.socialnetworks.lib.SocialNetwork;
+import com.wezom.socialnetworks.lib.listener.OnLoginCompleteListener;
 import com.github.androidsocialnetworks.apidemos.fragment.base.BaseLoginDemoFragment;
 
 public class LoginUsingGlobalListenersFragment extends BaseLoginDemoFragment

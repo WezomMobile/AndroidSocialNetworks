@@ -1,22 +1,21 @@
-package com.androidsocialnetworks.lib.impl;
+package com.wezom.socialnetworks.lib.impl;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.v4.app.Fragment;
 import android.util.Log;
 
-import com.androidsocialnetworks.lib.AccessToken;
-import com.androidsocialnetworks.lib.SocialNetwork;
-import com.androidsocialnetworks.lib.SocialNetworkException;
-import com.androidsocialnetworks.lib.SocialPerson;
-import com.androidsocialnetworks.lib.listener.OnCheckIsFriendCompleteListener;
-import com.androidsocialnetworks.lib.listener.OnLoginCompleteListener;
-import com.androidsocialnetworks.lib.listener.OnPostingCompleteListener;
-import com.androidsocialnetworks.lib.listener.OnRequestAddFriendCompleteListener;
-import com.androidsocialnetworks.lib.listener.OnRequestRemoveFriendCompleteListener;
-import com.androidsocialnetworks.lib.listener.OnRequestSocialPersonCompleteListener;
+import com.wezom.socialnetworks.lib.AccessToken;
+import com.wezom.socialnetworks.lib.SocialNetwork;
+import com.wezom.socialnetworks.lib.SocialNetworkException;
+import com.wezom.socialnetworks.lib.SocialPerson;
+import com.wezom.socialnetworks.lib.listener.OnCheckIsFriendCompleteListener;
+import com.wezom.socialnetworks.lib.listener.OnLoginCompleteListener;
+import com.wezom.socialnetworks.lib.listener.OnPostingCompleteListener;
+import com.wezom.socialnetworks.lib.listener.OnRequestAddFriendCompleteListener;
+import com.wezom.socialnetworks.lib.listener.OnRequestRemoveFriendCompleteListener;
+import com.wezom.socialnetworks.lib.listener.OnRequestSocialPersonCompleteListener;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.plus.Plus;

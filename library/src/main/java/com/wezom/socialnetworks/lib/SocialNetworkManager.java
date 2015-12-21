@@ -1,18 +1,17 @@
-package com.androidsocialnetworks.lib;
+package com.wezom.socialnetworks.lib;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 
-import com.androidsocialnetworks.lib.impl.FacebookSocialNetwork;
-import com.androidsocialnetworks.lib.impl.GooglePlusSocialNetwork;
-import com.androidsocialnetworks.lib.impl.LinkedInSocialNetwork;
-import com.androidsocialnetworks.lib.impl.TwitterSocialNetwork;
-import com.androidsocialnetworks.lib.impl.VkSocialNetwork;
-import com.androidsocialnetworks.lib.impl.WeiboSocialNetwork;
+import com.wezom.socialnetworks.lib.impl.FacebookSocialNetwork;
+import com.wezom.socialnetworks.lib.impl.GooglePlusSocialNetwork;
+import com.wezom.socialnetworks.lib.impl.LinkedInSocialNetwork;
+import com.wezom.socialnetworks.lib.impl.TwitterSocialNetwork;
+import com.wezom.socialnetworks.lib.impl.VkSocialNetwork;
+import com.wezom.socialnetworks.lib.impl.WeiboSocialNetwork;
 import com.facebook.internal.Utility;
 
 import java.util.ArrayList;

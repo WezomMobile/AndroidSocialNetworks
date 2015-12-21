@@ -1,4 +1,4 @@
-package com.androidsocialnetworks.lib.impl;
+package com.wezom.socialnetworks.lib.impl;
 
 import android.app.Activity;
 import android.content.Context;
@@ -7,11 +7,11 @@ import android.content.SharedPreferences;
 import android.text.TextUtils;
 import android.util.Log;
 
-import com.androidsocialnetworks.lib.AccessToken;
-import com.androidsocialnetworks.lib.OAuthSocialNetwork;
-import com.androidsocialnetworks.lib.SocialPerson;
-import com.androidsocialnetworks.lib.listener.OnLoginCompleteListener;
-import com.androidsocialnetworks.lib.listener.OnRequestSocialPersonCompleteListener;
+import com.wezom.socialnetworks.lib.AccessToken;
+import com.wezom.socialnetworks.lib.OAuthSocialNetwork;
+import com.wezom.socialnetworks.lib.SocialPerson;
+import com.wezom.socialnetworks.lib.listener.OnLoginCompleteListener;
+import com.wezom.socialnetworks.lib.listener.OnRequestSocialPersonCompleteListener;
 import com.sina.weibo.sdk.openapi.models.ErrorInfo;
 import com.vk.sdk.VKAccessToken;
 import com.vk.sdk.VKCallback;
@@ -32,8 +32,8 @@ import com.vk.sdk.api.model.VKList;
 public class VkSocialNetwork extends OAuthSocialNetwork {
     public static final String TAG = VkSocialNetwork.class.getName();
     public static final String KEY_ACCESS_TOKEN = "access_token";
-    private static final String PREFERENCES_VK = "com_vk_sdk_android";
     public static final int ID = 6;
+    private static final String PREFERENCES_VK = "com_vk_sdk_android";
     private static final String[] sMyScope = new String[]{
             VKScope.FRIENDS,
             VKScope.WALL,
@@ -59,7 +59,11 @@ public class VkSocialNetwork extends OAuthSocialNetwork {
 
     @Override
     public void logout() {
-
+        SharedPreferences pref = mActivity.getSharedPreferences(PREFERENCES_VK, Context.MODE_APPEND);
+        SharedPreferences.Editor editor = pref.edit();
+        editor.remove(KEY_ACCESS_TOKEN);
+        editor.commit();
+        mAccessToken = null;
     }
 
     @Override

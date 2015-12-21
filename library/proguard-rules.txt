@@ -18,7 +18,7 @@
 
 # http://stackoverflow.com/questions/14059888/android-proguard-keep-inner-class
 -keepattributes Exceptions, InnerClasses
--keep class com.androidsocialnetworks.lib.** { *; }
+-keep class com.wezom.socialnetworks.lib.** { *; }
 
 -dontwarn oauth.signpost.signature.**
 -dontwarn com.google.code.linkedinapi.**

@@ -3,11 +3,11 @@ package com.github.androidsocialnetworks.apidemos.fragment.demo;
 import android.os.Bundle;
 import android.view.View;
 
-import com.androidsocialnetworks.lib.impl.FacebookSocialNetwork;
-import com.androidsocialnetworks.lib.impl.LinkedInSocialNetwork;
-import com.androidsocialnetworks.lib.impl.TwitterSocialNetwork;
-import com.androidsocialnetworks.lib.impl.WeiboSocialNetwork;
-import com.androidsocialnetworks.lib.listener.OnPostingCompleteListener;
+import com.wezom.socialnetworks.lib.impl.FacebookSocialNetwork;
+import com.wezom.socialnetworks.lib.impl.LinkedInSocialNetwork;
+import com.wezom.socialnetworks.lib.impl.TwitterSocialNetwork;
+import com.wezom.socialnetworks.lib.impl.WeiboSocialNetwork;
+import com.wezom.socialnetworks.lib.listener.OnPostingCompleteListener;
 import com.github.androidsocialnetworks.apidemos.fragment.base.BaseDemoFragment;
 
 import java.util.UUID;

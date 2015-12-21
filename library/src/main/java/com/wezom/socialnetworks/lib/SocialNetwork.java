@@ -1,4 +1,4 @@
-package com.androidsocialnetworks.lib;
+package com.wezom.socialnetworks.lib;
 
 import android.app.Activity;
 import android.content.Context;
@@ -8,28 +8,21 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 
-import com.androidsocialnetworks.lib.listener.OnCheckIsFriendCompleteListener;
-import com.androidsocialnetworks.lib.listener.OnLoginCompleteListener;
-import com.androidsocialnetworks.lib.listener.OnPostingCompleteListener;
-import com.androidsocialnetworks.lib.listener.OnRequestAddFriendCompleteListener;
-import com.androidsocialnetworks.lib.listener.OnRequestRemoveFriendCompleteListener;
-import com.androidsocialnetworks.lib.listener.OnRequestSocialPersonCompleteListener;
-import com.androidsocialnetworks.lib.listener.base.SocialNetworkListener;
+import com.wezom.socialnetworks.lib.listener.OnCheckIsFriendCompleteListener;
+import com.wezom.socialnetworks.lib.listener.OnLoginCompleteListener;
+import com.wezom.socialnetworks.lib.listener.OnPostingCompleteListener;
+import com.wezom.socialnetworks.lib.listener.OnRequestAddFriendCompleteListener;
+import com.wezom.socialnetworks.lib.listener.OnRequestRemoveFriendCompleteListener;
+import com.wezom.socialnetworks.lib.listener.OnRequestSocialPersonCompleteListener;
+import com.wezom.socialnetworks.lib.listener.base.SocialNetworkListener;
 
 import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
-import static com.androidsocialnetworks.lib.Consts.TAG;
+import static com.wezom.socialnetworks.lib.Consts.TAG;
 
-/**
- * Ids:
- * <p/>
- * 1 - Twitter
- * 2 - LinkedIn
- * 3 - Google Plus
- * 4 - Facebook
- */
+
 public abstract class SocialNetwork {
 
     public static final String REQUEST_LOGIN = "SocialNetwork.REQUEST_LOGIN";
@@ -48,11 +41,7 @@ public abstract class SocialNetwork {
     protected Map<String, SocialNetworkListener> mGlobalListeners = new HashMap<String, SocialNetworkListener>();
     protected Map<String, SocialNetworkListener> mLocalListeners = new HashMap<String, SocialNetworkListener>();
 
-    /**
-     * @param activity ant not activity or activity, as we will need to call startActivityForResult,
-     *                we will want to receice on onActivityResult in out SocialNetworkManager
-     *                activity
-     */
+
     protected SocialNetwork(Activity activity) {
         mActivity = activity;
 

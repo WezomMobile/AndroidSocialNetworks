@@ -1,4 +1,4 @@
-package com.androidsocialnetworks.lib;
+package com.wezom.socialnetworks.lib;
 
 import android.os.AsyncTask;
 import android.os.Bundle;

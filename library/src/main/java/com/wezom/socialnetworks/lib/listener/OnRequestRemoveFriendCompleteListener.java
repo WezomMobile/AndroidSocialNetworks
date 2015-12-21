@@ -1,6 +1,6 @@
-package com.androidsocialnetworks.lib.listener;
+package com.wezom.socialnetworks.lib.listener;
 
-import com.androidsocialnetworks.lib.listener.base.SocialNetworkListener;
+import com.wezom.socialnetworks.lib.listener.base.SocialNetworkListener;
 
 public interface OnRequestRemoveFriendCompleteListener extends SocialNetworkListener {
     public void onRequestRemoveFriendComplete(int socialNetworkID, String userID);

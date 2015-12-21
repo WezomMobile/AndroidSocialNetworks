@@ -1,4 +1,4 @@
-package com.androidsocialnetworks.lib.impl;
+package com.wezom.socialnetworks.lib.impl;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -6,12 +6,12 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 
-import com.androidsocialnetworks.lib.AccessToken;
-import com.androidsocialnetworks.lib.OAuthSocialNetwork;
-import com.androidsocialnetworks.lib.SocialPerson;
-import com.androidsocialnetworks.lib.listener.OnLoginCompleteListener;
-import com.androidsocialnetworks.lib.listener.OnPostingCompleteListener;
-import com.androidsocialnetworks.lib.listener.OnRequestSocialPersonCompleteListener;
+import com.wezom.socialnetworks.lib.AccessToken;
+import com.wezom.socialnetworks.lib.OAuthSocialNetwork;
+import com.wezom.socialnetworks.lib.SocialPerson;
+import com.wezom.socialnetworks.lib.listener.OnLoginCompleteListener;
+import com.wezom.socialnetworks.lib.listener.OnPostingCompleteListener;
+import com.wezom.socialnetworks.lib.listener.OnRequestSocialPersonCompleteListener;
 import com.sina.weibo.sdk.auth.AuthInfo;
 import com.sina.weibo.sdk.auth.Oauth2AccessToken;
 import com.sina.weibo.sdk.auth.WeiboAuthListener;
@@ -27,9 +27,9 @@ import com.sina.weibo.sdk.openapi.models.User;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import static com.androidsocialnetworks.lib.AccessTokenKeeper.clear;
-import static com.androidsocialnetworks.lib.AccessTokenKeeper.readAccessToken;
-import static com.androidsocialnetworks.lib.AccessTokenKeeper.writeAccessToken;
+import static com.wezom.socialnetworks.lib.AccessTokenKeeper.clear;
+import static com.wezom.socialnetworks.lib.AccessTokenKeeper.readAccessToken;
+import static com.wezom.socialnetworks.lib.AccessTokenKeeper.writeAccessToken;
 
 /**
  * Created with IntelliJ IDEA.
