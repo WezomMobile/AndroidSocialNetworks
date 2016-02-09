@@ -1,4 +1,4 @@
-package com.github.androidsocialnetworks.apidemos.fragment.demo;
+package com.socialdemo.fragment.demo;
 
 import android.content.res.AssetManager;
 import android.os.Bundle;
@@ -6,11 +6,13 @@ import android.os.Environment;
 import android.util.Log;
 import android.view.View;
 
+import android.widget.Toast;
 import com.wezom.socialnetworks.lib.impl.FacebookSocialNetwork;
 import com.wezom.socialnetworks.lib.impl.TwitterSocialNetwork;
+import com.wezom.socialnetworks.lib.impl.VkSocialNetwork;
 import com.wezom.socialnetworks.lib.listener.OnPostingCompleteListener;
-import com.github.androidsocialnetworks.apidemos.APIDemosApplication;
-import com.github.androidsocialnetworks.apidemos.fragment.base.BaseDemoFragment;
+import com.socialdemo.APIDemosApplication;
+import com.socialdemo.fragment.base.BaseDemoFragment;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -34,6 +36,7 @@ public class PostPhotoFragment extends BaseDemoFragment {
         mTwitterButton.setText("Post photo tweet");
         mLinkedInButton.setVisibility(View.GONE);
         mFacebookButton.setText("Post to Facebook");
+        mVkButton.setText("Post photo to VK");
         mGooglePlusButton.setVisibility(View.GONE);
 
         if (!ANDROID_ASSET_FILE.exists()) {
@@ -43,14 +46,15 @@ public class PostPhotoFragment extends BaseDemoFragment {
 
     @Override
     protected void onTwitterAction() {
-        if (!checkIsLoginned(TwitterSocialNetwork.ID)) return;
+        if (!checkIsLoginned(TwitterSocialNetwork.ID)) {
+            return;
+        }
 
         final String message = "ASN Test: " + UUID.randomUUID();
 
         showProgress("Posting photo");
-        getSocialNetworkManager().getTwitterSocialNetwork().requestPostPhoto(ANDROID_ASSET_FILE, message,
-                new DemoOnPostingCompleteListener(message)
-        );
+        getSocialNetworkManager().getTwitterSocialNetwork()
+                                 .requestPostPhoto(ANDROID_ASSET_FILE, message, new DemoOnPostingCompleteListener(message));
     }
 
     @Override
@@ -60,19 +64,28 @@ public class PostPhotoFragment extends BaseDemoFragment {
 
     @Override
     protected void onVkInAction() {
-
+        if (checkIsLoginned(VkSocialNetwork.ID)) {
+            final String message = "ASN Test: " + UUID.randomUUID();
+            showProgress("Posting photo");
+            getSocialNetworkManager().getVkInSocialNetwork()
+                                     .requestPostPhoto(ANDROID_ASSET_FILE, message, new DemoOnPostingCompleteListener(message));
+        }
+        else {
+            Toast.makeText(getActivity(), "Login to post a message", Toast.LENGTH_SHORT).show();
+        }
     }
 
     @Override
     protected void onFacebookAction() {
-        if (!checkIsLoginned(FacebookSocialNetwork.ID)) return;
+        if (!checkIsLoginned(FacebookSocialNetwork.ID)) {
+            return;
+        }
 
         final String message = "ASN Test: " + UUID.randomUUID();
 
         showProgress("Posting photo");
-        getSocialNetworkManager().getFacebookSocialNetwork().requestPostPhoto(ANDROID_ASSET_FILE, message,
-                new DemoOnPostingCompleteListener(message)
-        );
+        getSocialNetworkManager().getFacebookSocialNetwork()
+                                 .requestPostPhoto(ANDROID_ASSET_FILE, message, new DemoOnPostingCompleteListener(message));
     }
 
     @Override
@@ -87,20 +100,23 @@ public class PostPhotoFragment extends BaseDemoFragment {
 
     private void copyAssets() {
         AssetManager assetManager = getActivity().getAssets();
-        InputStream in = null;
-        OutputStream out = null;
+        InputStream  in           = null;
+        OutputStream out          = null;
         try {
             in = assetManager.open("android.jpg");
             out = new FileOutputStream(ANDROID_ASSET_FILE);
             copyFile(in, out);
             out.flush();
-        } catch (IOException e) {
+        }
+        catch (IOException e) {
             Log.e(APIDemosApplication.TAG, "ERROR", e);
-        } finally {
+        }
+        finally {
             if (in != null) {
                 try {
                     in.close();
-                } catch (IOException e) {
+                }
+                catch (IOException e) {
                     e.printStackTrace();
                 }
             }
@@ -108,7 +124,8 @@ public class PostPhotoFragment extends BaseDemoFragment {
             if (out != null) {
                 try {
                     out.close();
-                } catch (IOException e) {
+                }
+                catch (IOException e) {
                     e.printStackTrace();
                 }
             }
@@ -117,13 +134,14 @@ public class PostPhotoFragment extends BaseDemoFragment {
 
     private void copyFile(InputStream in, OutputStream out) throws IOException {
         byte[] buffer = new byte[1024];
-        int read;
+        int    read;
         while ((read = in.read(buffer)) != -1) {
             out.write(buffer, 0, read);
         }
     }
 
     private class DemoOnPostingCompleteListener implements OnPostingCompleteListener {
+
         private String mmMessage;
 
         private DemoOnPostingCompleteListener(String message) {

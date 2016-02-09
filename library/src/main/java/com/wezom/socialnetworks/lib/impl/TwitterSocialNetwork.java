@@ -262,6 +262,7 @@ public class TwitterSocialNetwork extends OAuthSocialNetwork {
         initTwitterClient();
     }
 
+
     private class RequestLoginAsyncTask extends SocialNetworkAsyncTask {
         private static final String RESULT_OAUTH_LOGIN = "LoginAsyncTask.RESULT_OAUTH_LOGIN";
 

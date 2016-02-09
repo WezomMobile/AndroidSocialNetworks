@@ -1,13 +1,11 @@
-package com.github.androidsocialnetworks.apidemos.activity;
+package com.socialdemo.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
-
+import com.socialdemo.fragment.APIDemosListFragment;
 import com.wezom.socialnetworks.lib.SocialNetworkManager;
-import com.github.androidsocialnetworks.apidemos.R;
-import com.github.androidsocialnetworks.apidemos.fragment.APIDemosListFragment;
 
 
 public class MainActivity extends AppCompatActivity {

@@ -1,7 +1,7 @@
-package com.github.androidsocialnetworks.apidemos.fragment.demo;
+package com.socialdemo.fragment.demo;
 
 import com.wezom.socialnetworks.lib.listener.OnLoginCompleteListener;
-import com.github.androidsocialnetworks.apidemos.fragment.base.BaseLoginDemoFragment;
+import com.socialdemo.fragment.base.BaseLoginDemoFragment;
 
 public class LoginUsingLocalListenersFragment extends BaseLoginDemoFragment {
     public static LoginUsingLocalListenersFragment newInstance() {
@@ -22,7 +22,7 @@ public class LoginUsingLocalListenersFragment extends BaseLoginDemoFragment {
 
     @Override
     protected void onVkInAction() {
-//        showProgress("Authentificating... Vk");
+        showProgress("Authentificating... Vk");
         getSocialNetworkManager().getVkInSocialNetwork().requestLogin(new DemoOnLoginCompleteListener());
     }
 

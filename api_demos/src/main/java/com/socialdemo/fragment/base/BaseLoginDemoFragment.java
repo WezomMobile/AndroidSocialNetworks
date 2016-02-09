@@ -1,4 +1,4 @@
-package com.github.androidsocialnetworks.apidemos.fragment.base;
+package com.socialdemo.fragment.base;
 
 import android.graphics.Color;
 import android.view.View;

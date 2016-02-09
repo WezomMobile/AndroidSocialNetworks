@@ -1,4 +1,4 @@
-package com.github.androidsocialnetworks.apidemos.fragment.demo;
+package com.socialdemo.fragment.demo;
 
 import android.os.Bundle;
 import android.view.View;
@@ -6,8 +6,8 @@ import android.view.View;
 import com.wezom.socialnetworks.lib.impl.LinkedInSocialNetwork;
 import com.wezom.socialnetworks.lib.impl.TwitterSocialNetwork;
 import com.wezom.socialnetworks.lib.listener.OnRequestAddFriendCompleteListener;
-import com.github.androidsocialnetworks.apidemos.APIDemosApplication;
-import com.github.androidsocialnetworks.apidemos.fragment.base.BaseDemoFragment;
+import com.socialdemo.APIDemosApplication;
+import com.socialdemo.fragment.base.BaseDemoFragment;
 
 public class AddFriendFragment extends BaseDemoFragment {
     public static AddFriendFragment newInstance() {

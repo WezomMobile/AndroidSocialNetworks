@@ -1,4 +1,4 @@
-package com.github.androidsocialnetworks.apidemos.fragment;
+package com.socialdemo.fragment;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -14,19 +14,17 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.wezom.socialnetworks.lib.SocialNetwork;
-import com.wezom.socialnetworks.lib.SocialNetworkManager;
-import com.github.androidsocialnetworks.apidemos.R;
-import com.github.androidsocialnetworks.apidemos.activity.MainActivity;
-import com.github.androidsocialnetworks.apidemos.fragment.demo.AddFriendFragment;
-import com.github.androidsocialnetworks.apidemos.fragment.demo.CheckIsFriendFragment;
-import com.github.androidsocialnetworks.apidemos.fragment.demo.CurrentUserProfileFragment;
-import com.github.androidsocialnetworks.apidemos.fragment.demo.LoginUsingGlobalListenersFragment;
-import com.github.androidsocialnetworks.apidemos.fragment.demo.LoginUsingLocalListenersFragment;
-import com.github.androidsocialnetworks.apidemos.fragment.demo.OtherUsersProfile;
-import com.github.androidsocialnetworks.apidemos.fragment.demo.PostMessageFragment;
-import com.github.androidsocialnetworks.apidemos.fragment.demo.PostPhotoFragment;
-import com.github.androidsocialnetworks.apidemos.fragment.demo.RemoveFriendFragment;
+import com.socialdemo.activity.MainActivity;
+import com.socialdemo.activity.R;
+import com.socialdemo.fragment.demo.AddFriendFragment;
+import com.socialdemo.fragment.demo.CheckIsFriendFragment;
+import com.socialdemo.fragment.demo.CurrentUserProfileFragment;
+import com.socialdemo.fragment.demo.LoginUsingGlobalListenersFragment;
+import com.socialdemo.fragment.demo.LoginUsingLocalListenersFragment;
+import com.socialdemo.fragment.demo.OtherUsersProfile;
+import com.socialdemo.fragment.demo.PostMessageFragment;
+import com.socialdemo.fragment.demo.PostPhotoFragment;
+import com.socialdemo.fragment.demo.RemoveFriendFragment;
 
 import java.util.ArrayList;
 import java.util.List;

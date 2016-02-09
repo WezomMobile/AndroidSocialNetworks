@@ -1,12 +1,12 @@
-package com.github.androidsocialnetworks.apidemos.fragment.demo;
+package com.socialdemo.fragment.demo;
 
 import android.os.Bundle;
 import android.view.View;
 
 import com.wezom.socialnetworks.lib.impl.TwitterSocialNetwork;
 import com.wezom.socialnetworks.lib.listener.OnRequestRemoveFriendCompleteListener;
-import com.github.androidsocialnetworks.apidemos.APIDemosApplication;
-import com.github.androidsocialnetworks.apidemos.fragment.base.BaseDemoFragment;
+import com.socialdemo.APIDemosApplication;
+import com.socialdemo.fragment.base.BaseDemoFragment;
 
 public class RemoveFriendFragment extends BaseDemoFragment {
     public static RemoveFriendFragment newInstance() {

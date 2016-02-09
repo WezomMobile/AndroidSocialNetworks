@@ -1,4 +1,4 @@
-package com.github.androidsocialnetworks.apidemos.fragment.dialog;
+package com.socialdemo.fragment.dialog;
 
 import android.app.AlertDialog;
 import android.app.Dialog;

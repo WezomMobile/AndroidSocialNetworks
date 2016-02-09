@@ -1,4 +1,4 @@
-package com.github.androidsocialnetworks.apidemos.fragment.demo;
+package com.socialdemo.fragment.demo;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -8,8 +8,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.socialdemo.activity.R;
 import com.wezom.socialnetworks.lib.SocialPerson;
-import com.github.androidsocialnetworks.apidemos.R;
 import com.squareup.picasso.Picasso;
 
 public class ShowProfileFragment extends Fragment {

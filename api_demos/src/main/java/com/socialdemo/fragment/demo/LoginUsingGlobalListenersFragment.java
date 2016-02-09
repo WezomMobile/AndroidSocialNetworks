@@ -1,8 +1,8 @@
-package com.github.androidsocialnetworks.apidemos.fragment.demo;
+package com.socialdemo.fragment.demo;
 
 import com.wezom.socialnetworks.lib.SocialNetwork;
 import com.wezom.socialnetworks.lib.listener.OnLoginCompleteListener;
-import com.github.androidsocialnetworks.apidemos.fragment.base.BaseLoginDemoFragment;
+import com.socialdemo.fragment.base.BaseLoginDemoFragment;
 
 public class LoginUsingGlobalListenersFragment extends BaseLoginDemoFragment
         implements OnLoginCompleteListener {
@@ -33,11 +33,13 @@ public class LoginUsingGlobalListenersFragment extends BaseLoginDemoFragment
 
     @Override
     protected void onVkInAction() {
+        showProgress("Authentificating... Vkontakte");
         getSocialNetworkManager().getVkInSocialNetwork().requestLogin();
     }
 
     @Override
     protected void onFacebookAction() {
+        showProgress("Authentificating... FaceBook");
         getSocialNetworkManager().getFacebookSocialNetwork().requestLogin();
     }
 
@@ -68,4 +70,6 @@ public class LoginUsingGlobalListenersFragment extends BaseLoginDemoFragment
             socialNetwork.setOnLoginCompleteListener(this);
         }
     }
+
+
 }

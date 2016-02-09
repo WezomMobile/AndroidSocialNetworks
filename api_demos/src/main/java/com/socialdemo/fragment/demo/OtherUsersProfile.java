@@ -1,23 +1,24 @@
-package com.github.androidsocialnetworks.apidemos.fragment.demo;
+package com.socialdemo.fragment.demo;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
 
+import com.socialdemo.activity.R;
 import com.wezom.socialnetworks.lib.SocialPerson;
 import com.wezom.socialnetworks.lib.impl.FacebookSocialNetwork;
 import com.wezom.socialnetworks.lib.impl.GooglePlusSocialNetwork;
 import com.wezom.socialnetworks.lib.impl.LinkedInSocialNetwork;
 import com.wezom.socialnetworks.lib.impl.TwitterSocialNetwork;
-import com.wezom.socialnetworks.lib.impl.VkSocialNetwork;
-import com.wezom.socialnetworks.lib.impl.WeiboSocialNetwork;
 import com.wezom.socialnetworks.lib.listener.OnRequestSocialPersonCompleteListener;
-import com.github.androidsocialnetworks.apidemos.R;
-import com.github.androidsocialnetworks.apidemos.fragment.base.BaseDemoFragment;
+import com.socialdemo.APIDemosApplication;
+import com.socialdemo.fragment.base.BaseDemoFragment;
 
-public class CurrentUserProfileFragment extends BaseDemoFragment implements View.OnClickListener {
+public class OtherUsersProfile extends BaseDemoFragment {
 
-    public static CurrentUserProfileFragment newInstance() {
-        return new CurrentUserProfileFragment();
+
+    public static OtherUsersProfile newInstance() {
+        return new OtherUsersProfile();
     }
 
     @Override
@@ -26,9 +27,8 @@ public class CurrentUserProfileFragment extends BaseDemoFragment implements View
 
         mTwitterButton.setText("Load Twitter Profile");
         mLinkedInButton.setText("Load LinkedIn Profile");
-        mFacebookButton.setText("Load Facebook Profile");
-        mVkButton.setText("Load Vk Profile");
-        mGooglePlusButton.setText("Load Google Plus Profile");
+        mFacebookButton.setVisibility(View.GONE);
+        mGooglePlusButton.setVisibility(View.GONE);
     }
 
     @Override
@@ -36,9 +36,9 @@ public class CurrentUserProfileFragment extends BaseDemoFragment implements View
         if (!checkIsLoginned(TwitterSocialNetwork.ID)) return;
 
         showProgress("Loading profile");
-        getSocialNetworkManager().getTwitterSocialNetwork()
-                .requestCurrentPerson(new DemoOnRequestSocialPersonCompleteListener());
-
+        getSocialNetworkManager().getTwitterSocialNetwork().requestSocialPerson(APIDemosApplication.USER_ID_TWITTER,
+                new DemoOnRequestSocialPersonCompleteListener()
+        );
     }
 
     @Override
@@ -46,41 +46,33 @@ public class CurrentUserProfileFragment extends BaseDemoFragment implements View
         if (!checkIsLoginned(LinkedInSocialNetwork.ID)) return;
 
         showProgress("Loading profile");
-        getSocialNetworkManager().getLinkedInSocialNetwork()
-                .requestCurrentPerson(new DemoOnRequestSocialPersonCompleteListener());
+        getSocialNetworkManager().getLinkedInSocialNetwork().requestSocialPerson(APIDemosApplication.USER_ID_LINKED_IN,
+                new DemoOnRequestSocialPersonCompleteListener()
+        );
     }
 
     @Override
     protected void onVkInAction() {
-        if (!checkIsLoginned(VkSocialNetwork.ID)) return;
 
-        getSocialNetworkManager().getVkInSocialNetwork().requestCurrentPerson(new DemoOnRequestSocialPersonCompleteListener());
     }
 
     @Override
     protected void onFacebookAction() {
         if (!checkIsLoginned(FacebookSocialNetwork.ID)) return;
 
-        showProgress("Loading profile");
-        getSocialNetworkManager().getFacebookSocialNetwork()
-                .requestCurrentPerson(new DemoOnRequestSocialPersonCompleteListener());
+        Toast.makeText(getActivity(), "Load Facebook Profile", Toast.LENGTH_SHORT).show();
     }
 
     @Override
     protected void onGooglePlusAction() {
         if (!checkIsLoginned(GooglePlusSocialNetwork.ID)) return;
 
-        getSocialNetworkManager().getGooglePlusSocialNetwork()
-                .requestCurrentPerson(new DemoOnRequestSocialPersonCompleteListener());
+        Toast.makeText(getActivity(), "Load Google Plus Profile", Toast.LENGTH_SHORT).show();
     }
 
     @Override
     protected void onWeiboAction() {
-        if (!checkIsLoginned(WeiboSocialNetwork.ID)) return;
-
-        getSocialNetworkManager().getWeiboSocialNetwork()
-                .requestCurrentPerson(new DemoOnRequestSocialPersonCompleteListener());
-
+        throw new IllegalStateException("Not implemented");
     }
 
     private class DemoOnRequestSocialPersonCompleteListener implements OnRequestSocialPersonCompleteListener {
@@ -100,4 +92,5 @@ public class CurrentUserProfileFragment extends BaseDemoFragment implements View
             handleError(errorMessage);
         }
     }
+
 }

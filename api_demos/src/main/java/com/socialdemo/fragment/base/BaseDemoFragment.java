@@ -1,4 +1,4 @@
-package com.github.androidsocialnetworks.apidemos.fragment.base;
+package com.socialdemo.fragment.base;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -7,20 +7,19 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-
+import com.socialdemo.activity.MainActivity;
+import com.socialdemo.activity.R;
+import com.socialdemo.fragment.dialog.AlertDialogFragment;
+import com.socialdemo.fragment.dialog.ProgressDialogFragment;
 import com.wezom.socialnetworks.lib.SocialNetwork;
 import com.wezom.socialnetworks.lib.SocialNetworkManager;
-import com.github.androidsocialnetworks.apidemos.R;
-import com.github.androidsocialnetworks.apidemos.activity.MainActivity;
-import com.github.androidsocialnetworks.apidemos.fragment.dialog.AlertDialogFragment;
-import com.github.androidsocialnetworks.apidemos.fragment.dialog.ProgressDialogFragment;
 
 public abstract class BaseDemoFragment extends Fragment
         implements SocialNetworkManager.OnInitializationCompleteListener, View.OnClickListener {
 
-    public static final String SOCIAL_NETWORK_TAG = "BaseLoginDemoFragment.SOCIAL_NETWORK_TAG";
-    private static final String PROGRESS_DIALOG_TAG = "BaseDemoFragment.PROGRESS_DIALOG_TAG";
-    protected boolean mSocialNetworkManagerInitialized = false;
+    public static final  String  SOCIAL_NETWORK_TAG               = "BaseLoginDemoFragment.SOCIAL_NETWORK_TAG";
+    private static final String  PROGRESS_DIALOG_TAG              = "BaseDemoFragment.PROGRESS_DIALOG_TAG";
+    protected            boolean mSocialNetworkManagerInitialized = false;
 
     protected Button mTwitterButton;
     protected Button mLinkedInButton;
@@ -56,7 +55,7 @@ public abstract class BaseDemoFragment extends Fragment
         setRetainInstance(true);
 
         Log.d("SocialNetworkManager", getSocialNetworkManager() + "");
-        if (getSocialNetworkManager()!=null) {
+        if (getSocialNetworkManager() != null) {
             getSocialNetworkManager().setOnInitializationCompleteListener(this);
         }
     }
@@ -148,16 +147,13 @@ public abstract class BaseDemoFragment extends Fragment
         if (getSocialNetworkManager().getSocialNetwork(socialNetworkID).isConnected()) {
             return true;
         }
-
-        AlertDialogFragment
-                .newInstance("Request Login", "This action request login, please go to login demo first.")
-                .show(getFragmentManager(), null);
-
-        return false;
+            AlertDialogFragment.newInstance("Request Login", "This action request login, please go to login demo first.")
+                               .show(getFragmentManager(), null);
+            return false;
     }
 
     public void onRequestCancel() {
-//        Log.d(TAG, "BaseDemoFragment.onRequestCancel");
+        //        Log.d(TAG, "BaseDemoFragment.onRequestCancel");
 
         for (SocialNetwork socialNetwork : getSocialNetworkManager().getInitializedSocialNetworks()) {
             socialNetwork.cancelAll();

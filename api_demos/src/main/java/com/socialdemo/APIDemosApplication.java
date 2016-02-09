@@ -1,4 +1,4 @@
-package com.github.androidsocialnetworks.apidemos;
+package com.socialdemo;
 
 import android.app.Application;
 

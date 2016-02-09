@@ -1,4 +1,4 @@
-package com.github.androidsocialnetworks.apidemos.fragment.dialog;
+package com.socialdemo.fragment.dialog;
 
 import android.app.Dialog;
 import android.app.ProgressDialog;
@@ -8,9 +8,9 @@ import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 
-import com.github.androidsocialnetworks.apidemos.fragment.base.BaseDemoFragment;
+import com.socialdemo.fragment.base.BaseDemoFragment;
 
-import static com.github.androidsocialnetworks.apidemos.APIDemosApplication.TAG;
+import static com.socialdemo.APIDemosApplication.TAG;
 
 public class ProgressDialogFragment extends DialogFragment {
 
