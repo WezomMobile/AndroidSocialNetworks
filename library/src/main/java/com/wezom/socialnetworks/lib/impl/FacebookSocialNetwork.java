@@ -180,7 +180,6 @@ public class FacebookSocialNetwork extends SocialNetwork {
     public void requestPostMessage(String message, OnPostingCompleteListener onPostingCompleteListener) {
         super.requestPostMessage(message, onPostingCompleteListener);
         mStatus = message;
-        mMessage = message;
         performPublish(PendingAction.POST_STATUS_UPDATE);
     }
 
@@ -188,6 +187,7 @@ public class FacebookSocialNetwork extends SocialNetwork {
     public void requestPostPhoto(File photo, String message, OnPostingCompleteListener onPostingCompleteListener) {
         super.requestPostPhoto(photo, message, onPostingCompleteListener);
         mPhotoPath = photo.getAbsolutePath();
+        mMessage = message;
         performPublish(PendingAction.POST_PHOTO);
     }
 

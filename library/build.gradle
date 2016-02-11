@@ -14,7 +14,7 @@ ext {
     siteUrl = 'https://github.com/WezomMobile/AndroidSocialNetworks'
     gitUrl = 'https://github.com/WezomMobile/AndroidSocialNetworks.git'
 
-    libraryVersion = '0.2.1'
+    libraryVersion = '0.2.2'
 
     developerId = 'wezom.mobile'
     developerName = 'Wezom Mobile'
